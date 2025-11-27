@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Jerry | Civil & Architectural Engineering Portfolio</title>
+    <title>Dr. Jangjae Lee | Infrastructure Resilience & ML Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- CSS Variables (Texas A&M Maroon Theme) --- */
+        /* Keeping TAMU Maroon as requested, effectively distinguishing your Ph.D. background */
         :root {
             --primary-color: #500000; /* Texas A&M Aggie Maroon */
             --secondary-color: #333333; /* Dark Grey */
             --accent-color: #EAAA00; /* Gold/Yellow for highlight */
-            --bg-color: #f4f4f4;
+            --bg-color: #f8f9fa;
             --white: #ffffff;
             --text-color: #2c3e50;
             --shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -77,7 +78,7 @@
             color: var(--secondary-color);
         }
 
-        /* --- About Section (Updated) --- */
+        /* --- About Section --- */
         .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start; }
         .profile-img { 
             width: 100%; 
@@ -88,12 +89,15 @@
             border: 1px solid #ddd;
         }
         .education-list li {
-            margin-bottom: 1.2rem;
-            border-left: 2px solid #ddd;
-            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #ddd;
+            padding-left: 1.2rem;
+            transition: border-color 0.3s;
         }
-        .education-list strong { color: var(--primary-color); font-size: 1.1rem; }
-        .education-list span { display: block; font-size: 0.95rem; color: #555; }
+        .education-list li:hover { border-left-color: var(--accent-color); }
+        .education-list strong { color: var(--primary-color); font-size: 1.15rem; display: block; }
+        .education-list .edu-meta { font-size: 0.95rem; color: #555; margin-bottom: 0.3rem; font-weight: 500;}
+        .education-list .edu-desc { font-size: 0.9rem; color: #666; font-style: italic; }
 
         .btn {
             display: inline-block;
@@ -108,6 +112,7 @@
         .btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
 
         /* --- Research Cards --- */
+        .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .card {
             background: var(--white);
             padding: 2rem;
@@ -120,7 +125,7 @@
         .card:hover { transform: translateY(-5px); }
         .card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
         .pub-meta { font-size: 0.95rem; color: #555; border-left: 3px solid #ccc; padding-left: 10px; margin: 10px 0; }
-
+        
         /* --- Footer --- */
         footer { text-align: center; padding: 3rem; background: var(--secondary-color); color: var(--white); margin-top: 4rem; }
         .social-icons a { margin: 0 15px; font-size: 1.8rem; color: var(--white); opacity: 0.8; }
@@ -129,16 +134,18 @@
         /* --- Mobile --- */
         @media (max-width: 768px) {
             .about-grid { grid-template-columns: 1fr; }
+            .research-grid { grid-template-columns: 1fr; }
             header h1 { font-size: 2.2rem; }
             .profile-img { max-width: 250px; margin: 0 auto; display: block; }
-            .nav-container { gap: 1rem; font-size: 0.9rem; }
+            .nav-container { gap: 1rem; font-size: 0.9rem; flex-wrap: wrap;}
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Dr. Jerry</h1> <p>Ph.D. in Civil Engineering, Texas A&M University<br>Postdoctoral Researcher specializing in [Your Specific Field]</p>
+        <h1>Dr. Jangjae Lee</h1>
+        <p>Postdoctoral Research Fellow at University of Houston<br>Ph.D. in Civil Engineering, Texas A&M University</p>
     </header>
 
     <nav>
@@ -154,24 +161,31 @@
         <section id="about">
             <h2 class="section-title">About Me</h2>
             <div class="about-grid">
-                <img src="assets/profile.jpg" onerror="this.src='https://via.placeholder.com/300x330?text=Dr.+Jerry'" alt="Profile Picture" class="profile-img">
+                <img src="assets/profile.jpg" onerror="this.src='https://via.placeholder.com/300x330?text=Dr.+Lee'" alt="Profile Picture" class="profile-img">
                 
                 <div>
-                    <p>Welcome. I am a Postdoctoral Researcher at [Current Institution], dedicated to advancing the field of Civil and Architectural Engineering. My research focuses on <strong>[Key Keyword 1]</strong> and <strong>[Key Keyword 2]</strong>, with the goal of solving complex infrastructure challenges.</p>
+                    <p>
+                        I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>. 
+                        My research develops comprehensive data-driven frameworks for <strong>infrastructure resilience</strong> by integrating multi-source data such as LiDAR, machine vision, and meteorological records.
+                        Previously, I conducted national-scale power grid resilience analysis at <strong>Oak Ridge National Laboratory (ORNL)</strong>.
+                    </p>
                     
                     <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.4rem;">Education</h3>
                     <ul class="education-list">
                         <li>
                             <strong>Ph.D. in Civil Engineering</strong>
-                            <span>Texas A&M University, College Station, TX, USA (Year)</span>
+                            <span class="edu-meta">Texas A&M University, College Station, TX (2020 - 2025)</span>
+                            <span class="edu-desc">Dissertation: Machine Learning-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions</span>
                         </li>
                         <li>
                             <strong>M.S. in Architectural Engineering</strong>
-                            <span>Hanyang University (Seoul Campus), Seoul, Korea (Year)</span>
+                            <span class="edu-meta">Hanyang University (Seoul Campus), Seoul, Korea (2016 - 2018)</span>
+                            <span class="edu-desc">Thesis: Seismic Performance of Exterior Beam-Column Joint Subassemblies Reinforced with Steel Fibers</span>
                         </li>
                         <li>
                             <strong>B.S. in Architectural Engineering</strong>
-                            <span>Hanyang University (ERICA Campus), Ansan, Korea (Year)</span>
+                            <span class="edu-meta">Hanyang University (ERICA Campus), Ansan, Korea (2010 - 2016)</span>
+                            <span class="edu-desc">Graduated with Honor Scholarship</span>
                         </li>
                     </ul>
 
@@ -182,13 +196,15 @@
 
         <section id="research">
             <h2 class="section-title">Research Interests</h2>
-            <div class="card">
-                <h3><i class="fas fa-building"></i> Structural Resilience & Design</h3>
-                <p>Describe your research on structural integrity, sustainable building materials, or urban resilience against natural disasters.</p>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-drafting-compass"></i> Smart Construction & Tech</h3>
-                <p>Explain your work regarding BIM, smart city infrastructure, or data-driven construction management methods.</p>
+            <div class="research-grid">
+                <div class="card">
+                    <h3><i class="fas fa-bolt"></i> AI-Driven Resilience</h3>
+                    <p>Machine Learning for Critical Infrastructure Resilience, Power Grid Analytics & Forecasting under Extreme Weather, and Explainable AI for Decision Support Systems.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-cubes"></i> Structural Materials</h3>
+                    <p>Seismic Performance of Reinforced Concrete, Machine Vision for Infrastructure Inspection, and Optimization of High-Performance Materials.</p>
+                </div>
             </div>
         </section>
 
@@ -196,29 +212,36 @@
             <h2 class="section-title">Selected Publications</h2>
             
             <div class="card">
-                <h3>Paper Title Regarding Civil Engineering</h3>
-                <p class="pub-meta"><strong>Jerry [Last Name]</strong>, Co-author. <em>Journal of Structural Engineering</em>, 2025.</p>
+                <h3>A data-driven approach to predicting power outages during winter storms</h3>
+                <p class="pub-meta"><strong>Lee, J.</strong>, Zhang, Z., & Paal, S.G. <em>Computational Urban Science (Springer)</em>, 2025.</p>
                 <div>
-                    <a href="#" style="color: var(--primary-color); font-weight: bold;">[PDF]</a> &nbsp;
-                    <a href="#" style="color: var(--primary-color); font-weight: bold;">[DOI]</a>
+                    <a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank" style="color: var(--primary-color); font-weight: bold;">[DOI Link]</a>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Another Significant Research Paper</h3>
-                <p class="pub-meta">Co-author, <strong>Jerry [Last Name]</strong>. <em>Building and Environment</em>, 2024.</p>
+                <h3>A near-real-time model for predicting electricity disruptions in Texas</h3>
+                <p class="pub-meta"><strong>Lee, J.</strong>, Lee, S.M., Chinthavali, S., & Paal, S.G. <em>IEEE Access</em>, 2025.</p>
                 <div>
-                    <a href="#" style="color: var(--primary-color); font-weight: bold;">[PDF]</a>
+                    <a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank" style="color: var(--primary-color); font-weight: bold;">[DOI Link]</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Shear strength of steel fiber-reinforced concrete exterior beam-column joints</h3>
+                <p class="pub-meta">Son, D.H., Bae, B.I., <strong>Lee, J.</strong>, & Choi, C.S. <em>Structures</em>, 2024.</p>
+                <div>
+                    <a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank" style="color: var(--primary-color); font-weight: bold;">[DOI Link]</a>
                 </div>
             </div>
         </section>
 
         <section id="contact">
             <h2 class="section-title">Contact</h2>
-            <p>I am open to academic collaborations and research discussions.</p>
             <div style="margin-top: 20px; font-size: 1.1rem; line-height: 2;">
-                <p><i class="fas fa-envelope" style="color:var(--primary-color); width:25px;"></i> your.email@tamu.edu</p>
-                <p><i class="fas fa-map-marker-alt" style="color:var(--primary-color); width:25px;"></i> Department of Civil Engineering, [Building Name]</p>
+                <p><i class="fas fa-university" style="color:var(--primary-color); width:30px;"></i> Department of Civil and Environmental Engineering, University of Houston</p>
+                <p><i class="fas fa-map-marker-alt" style="color:var(--primary-color); width:30px;"></i> 4226 Martin Luther King Boulevard, Houston, TX 77204-4003</p>
+                <p><i class="fas fa-envelope" style="color:var(--primary-color); width:30px;"></i> <a href="mailto:jlee277@central.uh.edu">jlee277@central.uh.edu</a></p>
             </div>
         </section>
     </div>
@@ -227,9 +250,9 @@
         <div class="social-icons">
             <a href="#" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
             <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
         </div>
-        <p style="margin-top: 15px; font-size: 0.85rem;">&copy; 2025 Dr. Jerry. All rights reserved.</p>
+        <p style="margin-top: 15px; font-size: 0.85rem;">&copy; 2025 Dr. Jangjae Lee. All rights reserved.</p>
     </footer>
 
 </body>
