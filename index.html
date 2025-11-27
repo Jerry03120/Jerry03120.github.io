@@ -74,7 +74,23 @@
         }
         .hero h1 { font-size: 3rem; margin-bottom: 10px; color: var(--dark); }
         .hero-role { font-size: 1.2rem; color: var(--text-muted); font-weight: 300; margin-bottom: 30px; }
-        .hero-contact a { margin: 0 10px; font-size: 1.5rem; color: var(--primary); }
+        
+        /* Contact Icons in Hero */
+        .hero-contact { margin-bottom: 20px; }
+        .hero-contact a { 
+            display: inline-flex; justify-content: center; align-items: center;
+            width: 50px; height: 50px; margin: 0 8px; 
+            font-size: 1.5rem; color: var(--primary); 
+            background: #fff; border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .hero-contact a:hover { 
+            transform: translateY(-3px); 
+            background-color: var(--primary); 
+            color: var(--white); 
+        }
+
         .btn-cv {
             display: inline-block; padding: 12px 30px; margin-top: 30px;
             background: var(--primary); color: var(--white); font-weight: 700;
@@ -83,8 +99,6 @@
         .btn-cv:hover { background: var(--dark); color: var(--white); transform: translateY(-2px); }
 
         /* --- 6. Content Components --- */
-        
-        /* Job/Edu Items */
         .resume-item { 
             display: grid; 
             grid-template-columns: 180px 1fr; 
@@ -96,7 +110,6 @@
         .resume-content .institution { font-size: 1.05rem; color: var(--primary); font-weight: 500; margin-bottom: 10px; display: block; }
         .resume-content p { font-size: 0.95rem; color: #555; margin-bottom: 5px; }
 
-        /* Publications */
         .pub-category { margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid #eee; font-size: 1.4rem; }
         .pub-item { 
             padding-left: 15px; border-left: 3px solid var(--border); 
@@ -108,7 +121,6 @@
         .pub-venue { font-style: italic; color: var(--primary); font-weight: 500; }
         .pub-links a { font-size: 0.85rem; font-weight: 700; margin-right: 10px; text-decoration: underline; color: var(--primary); }
 
-        /* Skills Chips */
         .skill-group { margin-bottom: 20px; }
         .skill-label { font-weight: 700; display: block; margin-bottom: 10px; color: var(--dark); }
         .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -118,12 +130,10 @@
             border: 1px solid #ddd;
         }
 
-        /* Footer */
         footer { background: var(--dark); color: #aaa; text-align: center; padding: 50px 0; font-size: 0.9rem; }
 
-        /* Mobile */
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Hamburger menu omitted for simplicity */
+            .nav-links { display: none; }
             .nav-brand { margin: 0 auto; }
             .resume-item { grid-template-columns: 1fr; gap: 5px; }
             .resume-date { text-align: left; color: var(--accent); margin-bottom: 5px; }
@@ -149,18 +159,21 @@
 
     <section class="hero">
         <div class="container">
-            <img src="assets/Jangjae Lee_Bio.png" onerror="this.src='https://via.placeholder.com/300x300?text=JL'" alt="Jangjae Lee" class="hero-img">
+            <img src="assets/profile.jpg" onerror="this.src='https://via.placeholder.com/300x300?text=JL'" alt="Jangjae Lee" class="hero-img">
             <h1>Dr. Jangjae Lee</h1>
             <p class="hero-role">Postdoctoral Research Fellow at University of Houston<br>Ph.D. in Civil Engineering (Texas A&M University)</p>
             
             <div class="hero-contact">
                 <a href="mailto:jlee277@central.uh.edu" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                
+                <a href="https://www.linkedin.com/in/jangjlee10" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                
+                <a href="https://github.com/Jerry03120" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                
+                <a href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
             </div>
             
-            <a href="cv_1105_2025_FINAL_Application.pdf" class="btn-cv" target="_blank">
+            <a href="cv.pdf" class="btn-cv" target="_blank">
                 <i class="fas fa-file-download"></i> Download Full CV
             </a>
         </div>
@@ -170,12 +183,12 @@
         <div class="container">
             <div class="section-header"><h2>About Me</h2></div>
             <p style="font-size: 1.1rem; color: #444; margin-bottom: 30px;">
-                I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>[cite: 3].
-                My research focuses on developing comprehensive data-driven frameworks for <strong>infrastructure and community resilience</strong> assessment by integrating multi-source data (LiDAR, machine vision, meteorological data, etc.)[cite: 29].
-                Previously, I served as a Research Intern at <strong>Oak Ridge National Laboratory (ORNL)</strong>, conducting national-scale power grid resilience analysis[cite: 31, 35].
+                I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>.
+                My research focuses on developing comprehensive data-driven frameworks for <strong>infrastructure and community resilience</strong> assessment by integrating multi-source data (LiDAR, machine vision, meteorological data, etc.).
+                Previously, I served as a Research Intern at <strong>Oak Ridge National Laboratory (ORNL)</strong>, conducting national-scale power grid resilience analysis.
             </p>
 
-            <h3 style="margin-bottom: 15px;">Research Interests [cite: 19]</h3>
+            <h3 style="margin-bottom: 15px;">Research Interests</h3>
             <div class="skill-tags">
                 <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Infrastructure Resilience</span>
                 <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Machine Learning & AI</span>
@@ -194,7 +207,7 @@
                 <div class="resume-date">Sep 2025 - Present</div>
                 <div class="resume-content">
                     <h3>Postdoctoral Research Fellow</h3>
-                    <span class="institution">University of Houston, Houston, TX [cite: 27]</span>
+                    <span class="institution">University of Houston, Houston, TX</span>
                     <p>Principal Investigator: Dr. Abigail L. Beck. Developing frameworks for infrastructure resilience using big data analytics.</p>
                 </div>
             </div>
@@ -203,7 +216,7 @@
                 <div class="resume-date">May 2024 - Aug 2024</div>
                 <div class="resume-content">
                     <h3>Research Intern</h3>
-                    <span class="institution">Oak Ridge National Laboratory, Oak Ridge, TN [cite: 31]</span>
+                    <span class="institution">Oak Ridge National Laboratory, Oak Ridge, TN</span>
                     <p>Grid Resilience Research Group. Developed interpretable ML models for critical energy infrastructure systems.</p>
                 </div>
             </div>
@@ -212,7 +225,7 @@
                 <div class="resume-date">Jan 2022 - Aug 2025</div>
                 <div class="resume-content">
                     <h3>Doctoral Researcher</h3>
-                    <span class="institution">Texas A&M University, College Station, TX [cite: 98]</span>
+                    <span class="institution">Texas A&M University, College Station, TX</span>
                     <p>Advisor: Dr. Stephanie G. Paal. Architected ML frameworks for large-scale power outage prediction.</p>
                 </div>
             </div>
@@ -227,7 +240,7 @@
                 <div class="resume-date">2020 - 2025</div>
                 <div class="resume-content">
                     <h3>Ph.D. in Civil Engineering</h3>
-                    <span class="institution">Texas A&M University, College Station, TX [cite: 10]</span>
+                    <span class="institution">Texas A&M University, College Station, TX</span>
                     <p>Dissertation: <em>Machine Learning-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions</em></p>
                 </div>
             </div>
@@ -236,7 +249,7 @@
                 <div class="resume-date">2016 - 2018</div>
                 <div class="resume-content">
                     <h3>M.S. in Architectural Engineering</h3>
-                    <span class="institution">Hanyang University (Seoul Campus), Korea [cite: 14]</span>
+                    <span class="institution">Hanyang University (Seoul Campus), Korea</span>
                     <p>Thesis: <em>Seismic Performance of Exterior Beam-Column Joint Subassemblies Reinforced with Steel Fibers</em> (GPA: 4.25/4.5)</p>
                 </div>
             </div>
@@ -245,7 +258,7 @@
                 <div class="resume-date">2010 - 2016</div>
                 <div class="resume-content">
                     <h3>B.S. in Architectural Engineering</h3>
-                    <span class="institution">Hanyang University (ERICA Campus), Korea [cite: 17]</span>
+                    <span class="institution">Hanyang University (ERICA Campus), Korea</span>
                 </div>
             </div>
         </div>
@@ -258,7 +271,7 @@
             <h3 class="pub-category">Peer-Reviewed Journal Articles</h3>
             
             <div class="pub-item">
-                <span class="pub-title">[J1] A data-driven approach to predicting power outages during winter storms... [cite: 40]</span>
+                <span class="pub-title">[J1] A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models</span>
                 <div class="pub-authors"><strong>Lee, J.</strong>, Zhang, Z., & Paal, S.G. (2025)</div>
                 <div class="pub-venue">Computational Urban Science, Springer</div>
                 <div class="pub-links">
@@ -267,7 +280,7 @@
             </div>
 
             <div class="pub-item">
-                <span class="pub-title">[J2] A near-real-time model for predicting electricity disruptions in Texas... [cite: 42]</span>
+                <span class="pub-title">[J2] A near-real-time model for predicting electricity disruptions in Texas during winter storms</span>
                 <div class="pub-authors"><strong>Lee, J.</strong>, Lee, S.M., Chinthavali, S., & Paal, S.G. (2025)</div>
                 <div class="pub-venue">IEEE Access</div>
                 <div class="pub-links">
@@ -276,34 +289,40 @@
             </div>
 
             <div class="pub-item">
-                <span class="pub-title">[J3] Shear strength of steel fiber-reinforced concrete exterior beam-column joints... [cite: 44]</span>
+                <span class="pub-title">[J3] Shear strength of steel fiber-reinforced concrete exterior beam-column joints with various anchorage details under cyclic loading</span>
                 <div class="pub-authors">Son, D.H., Bae, B.I., <strong>Lee, J.</strong>, & Choi, C.S. (2024)</div>
                 <div class="pub-venue">Structures</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank">[DOI]</a>
+                </div>
             </div>
 
             <div class="pub-item">
-                <span class="pub-title">[J4] An experimental study on the seismic performance of reinforced concrete... [cite: 48]</span>
+                <span class="pub-title">[J4] An experimental study on the seismic performance of reinforced concrete exterior beam-column joints with steel fiber volume fractions</span>
                 <div class="pub-authors"><strong>Lee, J.</strong>, Bae, B.I., & Choi, C.S. (2018)</div>
                 <div class="pub-venue">Journal of Architectural Institute of Korea</div>
             </div>
 
             <h3 class="pub-category">Manuscripts Under Review & In Preparation</h3>
             <div class="pub-item">
-                <span class="pub-title">[R1] An integrated model for predicting power outages caused by various types of extreme weather events [cite: 52]</span>
+                <span class="pub-title">[R1] An integrated model for predicting power outages caused by various types of extreme weather events</span>
                 <div class="pub-venue">Under Revision</div>
             </div>
             <div class="pub-item">
-                <span class="pub-title">[P2] Community resilience to natural hazards using 311 reports and big data analytics [cite: 56]</span>
+                <span class="pub-title">[P2] Community resilience to natural hazards using 311 reports and big data analytics</span>
                 <div class="pub-venue">In Preparation (with A. Beck)</div>
             </div>
 
             <h3 class="pub-category">Selected Conference Proceedings</h3>
             <div class="pub-item">
-                <span class="pub-title">[CP1] A generalized outage prediction model for various types of extreme climate events in Texas [cite: 61]</span>
+                <span class="pub-title">[CP1] A generalized outage prediction model for various types of extreme climate events in Texas</span>
                 <div class="pub-venue">2024 IEEE International Conference on Big Data (BigData)</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank">[DOI]</a>
+                </div>
             </div>
             <div class="pub-item">
-                <span class="pub-title">[O1] Harnessing transfer learning to predict power outages from diverse climate hazards [cite: 69]</span>
+                <span class="pub-title">[O1] Harnessing transfer learning to predict power outages from diverse climate hazards</span>
                 <div class="pub-venue">ASCE Engineering Mechanics Institute Conference 2025 (Oral)</div>
             </div>
         </div>
@@ -316,7 +335,7 @@
                 <div class="resume-date">Spring 2023 - 2024</div>
                 <div class="resume-content">
                     <h3>Teaching Assistant: Engineering Mechanics (Dynamics)</h3>
-                    <span class="institution">Texas A&M University (CVEN 363) [cite: 127]</span>
+                    <span class="institution">Texas A&M University (CVEN 363)</span>
                     <p>Conducted biweekly recitation sessions for 60+ students. Developed solution keys and grading rubrics.</p>
                 </div>
             </div>
@@ -324,7 +343,7 @@
                 <div class="resume-date">Fall 2023</div>
                 <div class="resume-content">
                     <h3>Teaching Assistant: Theory of Structures</h3>
-                    <span class="institution">Texas A&M University (CVEN 345) [cite: 131]</span>
+                    <span class="institution">Texas A&M University (CVEN 345)</span>
                     <p>Assisted with grading and assessment for 150+ students.</p>
                 </div>
             </div>
@@ -335,7 +354,7 @@
         <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
             
             <div>
-                <h3><i class="fas fa-trophy" style="color:var(--accent);"></i> Honors & Awards [cite: 149]</h3>
+                <h3><i class="fas fa-trophy" style="color:var(--accent);"></i> Honors & Awards</h3>
                 <ul style="list-style: none; margin-top: 20px;">
                     <li style="margin-bottom: 15px;"><strong>Dissertation Fellowship</strong> <br><span style="color:#666;">Texas A&M University (2024-2025)</span></li>
                     <li style="margin-bottom: 15px;"><strong>Excellence Fellowship</strong> <br><span style="color:#666;">Texas A&M University (2020-2024)</span></li>
@@ -345,7 +364,7 @@
             </div>
 
             <div>
-                <h3><i class="fas fa-tools" style="color:var(--accent);"></i> Technical Skills [cite: 162]</h3>
+                <h3><i class="fas fa-tools" style="color:var(--accent);"></i> Technical Skills</h3>
                 <div class="skill-group" style="margin-top: 20px;">
                     <span class="skill-label">Data Science & ML</span>
                     <div class="skill-tags">
@@ -361,7 +380,7 @@
                     </div>
                 </div>
                 
-                <h3 style="margin-top: 30px;"><i class="fas fa-users" style="color:var(--accent);"></i> Professional Service [cite: 133]</h3>
+                <h3 style="margin-top: 30px;"><i class="fas fa-users" style="color:var(--accent);"></i> Professional Service</h3>
                 <ul style="list-style: none; margin-top: 15px; font-size: 0.95rem;">
                     <li><i class="fas fa-check" style="color:var(--primary); margin-right:5px;"></i> NHERI Graduate Student Council</li>
                     <li><i class="fas fa-check" style="color:var(--primary); margin-right:5px;"></i> ASCE Member</li>
@@ -377,10 +396,10 @@
                 <h2 style="color: #fff; margin-bottom: 20px;">Contact Me</h2>
                 <p style="margin-bottom: 20px;">
                     Department of Civil and Environmental Engineering, University of Houston <br>
-                    4226 Martin Luther King Boulevard, Houston, TX 77204-4003 [cite: 4]
+                    4226 Martin Luther King Boulevard, Houston, TX 77204-4003
                 </p>
                 <p style="font-size: 1.2rem; color: var(--white); margin-bottom: 30px;">
-                    <i class="fas fa-envelope"></i> jlee277@central.uh.edu
+                    <a href="mailto:jlee277@central.uh.edu" style="color:var(--white); text-decoration: underline;"><i class="fas fa-envelope"></i> jlee277@central.uh.edu</a>
                 </p>
                 <p>&copy; 2025 Dr. Jangjae Lee. All Rights Reserved.</p>
             </div>
