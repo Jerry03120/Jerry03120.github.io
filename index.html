@@ -132,12 +132,22 @@
 
         footer { background: var(--dark); color: #aaa; text-align: center; padding: 50px 0; font-size: 0.9rem; }
 
+        /* --- About Section Specific Styles --- */
+        .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start; }
+        .about-img { 
+            width: 100%; border-radius: 10px; 
+            box-shadow: var(--shadow); border: 1px solid #ddd;
+            aspect-ratio: 1/1.1; object-fit: cover;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .nav-brand { margin: 0 auto; }
             .resume-item { grid-template-columns: 1fr; gap: 5px; }
             .resume-date { text-align: left; color: var(--accent); margin-bottom: 5px; }
             .hero h1 { font-size: 2.2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-img { max-width: 300px; margin: 0 auto 30px; display: block; }
         }
     </style>
 </head>
@@ -165,15 +175,12 @@
             
             <div class="hero-contact">
                 <a href="mailto:jlee277@central.uh.edu" title="Email"><i class="fas fa-envelope"></i></a>
-                
                 <a href="https://www.linkedin.com/in/jangjlee10" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                
                 <a href="https://github.com/Jerry03120" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                
                 <a href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
             </div>
             
-            <a href="cv_1105_2025.pdf" class="btn-cv" target="_blank">
+            <a href="cv_1105_2025_FINAL_Application.pdf" class="btn-cv" target="_blank">
                 <i class="fas fa-file-download"></i> Download Full CV
             </a>
         </div>
@@ -182,19 +189,25 @@
     <section id="about" class="section">
         <div class="container">
             <div class="section-header"><h2>About Me</h2></div>
-            <p style="font-size: 1.1rem; color: #444; margin-bottom: 30px;">
-                I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>.
-                My research focuses on developing comprehensive data-driven frameworks for <strong>infrastructure and community resilience</strong> assessment by integrating multi-source data (LiDAR, machine vision, meteorological data, etc.).
-                Previously, I served as a Research Intern at <strong>Oak Ridge National Laboratory (ORNL)</strong>, conducting national-scale power grid resilience analysis.
-            </p>
+            <div class="about-grid">
+                <img src="assets/Jangjae Lee_Bio.png" onerror="this.src='https://via.placeholder.com/300x330?text=Dr.+Lee'" alt="Jangjae Lee Bio" class="about-img">
+                
+                <div>
+                    <p style="font-size: 1.1rem; color: #444; margin-bottom: 30px;">
+                        I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>.
+                        My research focuses on developing comprehensive data-driven frameworks for <strong>infrastructure and community resilience</strong> assessment by integrating multi-source data (LiDAR, machine vision, meteorological data, etc.).
+                        Previously, I served as a Research Intern at <strong>Oak Ridge National Laboratory (ORNL)</strong>, conducting national-scale power grid resilience analysis.
+                    </p>
 
-            <h3 style="margin-bottom: 15px;">Research Interests</h3>
-            <div class="skill-tags">
-                <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Infrastructure Resilience</span>
-                <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Machine Learning & AI</span>
-                <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Power Grid Analytics</span>
-                <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Climate-Informed Risk Modeling</span>
-                <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Machine Vision</span>
+                    <h3 style="margin-bottom: 15px;">Research Interests</h3>
+                    <div class="skill-tags">
+                        <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Infrastructure Resilience</span>
+                        <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Machine Learning & AI</span>
+                        <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Power Grid Analytics</span>
+                        <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Climate-Informed Risk Modeling</span>
+                        <span class="tag" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">Machine Vision</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
