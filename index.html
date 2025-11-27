@@ -3,37 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Your Name | Researcher Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Dr. Jerry | Civil & Architectural Engineering Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CSS Variables & Reset --- */
+        /* --- CSS Variables (Texas A&M Maroon Theme) --- */
         :root {
-            --primary-color: #003366; /* 학문적인 느낌의 딥 네이비 */
-            --accent-color: #d4a017; /* 세련된 골드 포인트 */
-            --bg-color: #f9f9f9;
-            --text-color: #333;
+            --primary-color: #500000; /* Texas A&M Aggie Maroon */
+            --secondary-color: #333333; /* Dark Grey */
+            --accent-color: #EAAA00; /* Gold/Yellow for highlight */
+            --bg-color: #f4f4f4;
             --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --text-color: #2c3e50;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: var(--text-color); background-color: var(--bg-color); }
+        body { font-family: 'Roboto', sans-serif; line-height: 1.7; color: var(--text-color); background-color: var(--bg-color); }
         h1, h2, h3 { font-family: 'Merriweather', serif; color: var(--primary-color); }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- Header & Nav --- */
+        /* --- Header --- */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #001f3f);
+            background: linear-gradient(135deg, var(--primary-color), #2c0000);
             color: var(--white);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
-        header h1 { font-size: 3rem; margin-bottom: 0.5rem; color: var(--white); }
-        header p { font-size: 1.2rem; font-weight: 300; opacity: 0.9; }
+        header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: var(--white); font-weight: 900; }
+        header p { font-size: 1.3rem; font-weight: 300; opacity: 0.9; letter-spacing: 0.5px; }
         
+        /* --- Navigation --- */
         nav {
             background: var(--white);
             box-shadow: var(--shadow);
@@ -41,87 +43,108 @@
             top: 0;
             z-index: 1000;
             padding: 1rem 0;
+            border-bottom: 3px solid var(--accent-color);
         }
         .nav-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
         }
-        .nav-link { font-weight: 700; color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 5px; }
-        .nav-link:hover { background-color: var(--primary-color); color: var(--white); }
+        .nav-link { 
+            font-weight: 700; 
+            color: var(--secondary-color); 
+            padding: 0.5rem 0; 
+            position: relative;
+        }
+        .nav-link:hover { color: var(--primary-color); }
+        .nav-link::after {
+            content: ''; display: block; width: 0; height: 2px; 
+            background: var(--primary-color); transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
 
-        /* --- Layout Container --- */
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-        section { margin-bottom: 4rem; padding-top: 60px; /* nav height offset */ margin-top: -60px; }
+        /* --- Layout --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+        section { margin-bottom: 5rem; padding-top: 80px; margin-top: -80px; }
         
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid var(--accent-color);
-            display: inline-block;
-            padding-bottom: 0.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 1rem;
+            color: var(--secondary-color);
         }
 
-        /* --- Profile Section --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; }
+        /* --- About Section (Updated) --- */
+        .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start; }
         .profile-img { 
             width: 100%; 
-            border-radius: 10px; 
+            border-radius: 5px; 
             box-shadow: var(--shadow); 
-            background-color: #ddd; /* 이미지 없을 때 회색 배경 */
-            aspect-ratio: 1/1; 
+            aspect-ratio: 1/1.1; 
             object-fit: cover;
+            border: 1px solid #ddd;
         }
+        .education-list li {
+            margin-bottom: 1.2rem;
+            border-left: 2px solid #ddd;
+            padding-left: 1rem;
+        }
+        .education-list strong { color: var(--primary-color); font-size: 1.1rem; }
+        .education-list span { display: block; font-size: 0.95rem; color: #555; }
+
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 0.8rem 1.5rem;
-            margin-top: 1rem;
-            border-radius: 5px;
+            padding: 0.8rem 2rem;
+            margin-top: 1.5rem;
+            border-radius: 30px;
             font-weight: bold;
+            box-shadow: 0 4px 6px rgba(80, 0, 0, 0.3);
         }
-        .btn:hover { background-color: var(--accent-color); color: var(--primary-color); }
+        .btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
 
-        /* --- Research & Publications --- */
+        /* --- Research Cards --- */
         .card {
             background: var(--white);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
             border-radius: 8px;
             box-shadow: var(--shadow);
-            border-left: 5px solid var(--accent-color);
+            border-top: 4px solid var(--primary-color);
             transition: transform 0.2s;
         }
-        .card:hover { transform: translateY(-3px); }
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .pub-meta { font-size: 0.9rem; color: #666; font-style: italic; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .pub-meta { font-size: 0.95rem; color: #555; border-left: 3px solid #ccc; padding-left: 10px; margin: 10px 0; }
 
         /* --- Footer --- */
-        footer { text-align: center; padding: 2rem; background: var(--primary-color); color: var(--white); margin-top: 3rem; }
-        .social-icons a { margin: 0 10px; font-size: 1.5rem; color: var(--white); }
+        footer { text-align: center; padding: 3rem; background: var(--secondary-color); color: var(--white); margin-top: 4rem; }
+        .social-icons a { margin: 0 15px; font-size: 1.8rem; color: var(--white); opacity: 0.8; }
+        .social-icons a:hover { opacity: 1; color: var(--accent-color); }
 
-        /* --- Mobile Responsive --- */
+        /* --- Mobile --- */
         @media (max-width: 768px) {
             .about-grid { grid-template-columns: 1fr; }
-            header h1 { font-size: 2rem; }
-            .profile-img { max-width: 200px; margin: 0 auto 1rem; display: block; }
+            header h1 { font-size: 2.2rem; }
+            .profile-img { max-width: 250px; margin: 0 auto; display: block; }
+            .nav-container { gap: 1rem; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Dr. Your Name</h1>
-        <p>Postdoctoral Researcher in [Your Field] <br> seeking to solve [Main Research Problem]</p>
+        <h1>Dr. Jerry</h1> <p>Ph.D. in Civil Engineering, Texas A&M University<br>Postdoctoral Researcher specializing in [Your Specific Field]</p>
     </header>
 
     <nav>
         <div class="nav-container">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#research" class="nav-link">Research</a>
+            <a href="#about" class="nav-link">About & Education</a>
+            <a href="#research" class="nav-link">Research Interests</a>
             <a href="#publications" class="nav-link">Publications</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
@@ -131,20 +154,28 @@
         <section id="about">
             <h2 class="section-title">About Me</h2>
             <div class="about-grid">
-                <img src="https://via.placeholder.com/300" alt="Profile Picture" class="profile-img">
+                <img src="assets/profile.jpg" onerror="this.src='https://via.placeholder.com/300x330?text=Dr.+Jerry'" alt="Profile Picture" class="profile-img">
+                
                 <div>
-                    <p>안녕하세요. 저는 현재 [소속 기관]에서 박사후 연구원으로 재직 중인 [이름]입니다. <br><br>
-                    저의 주요 연구 관심사는 <strong>[관심 분야 1]</strong>과 <strong>[관심 분야 2]</strong>입니다. 
-                    미래의 학문적 리더로서, [연구 목표]를 달성하기 위해 노력하고 있습니다.</p>
+                    <p>Welcome. I am a Postdoctoral Researcher at [Current Institution], dedicated to advancing the field of Civil and Architectural Engineering. My research focuses on <strong>[Key Keyword 1]</strong> and <strong>[Key Keyword 2]</strong>, with the goal of solving complex infrastructure challenges.</p>
                     
-                    <div style="margin-top: 20px;">
-                        <ul style="list-style: circle; padding-left: 20px; margin-bottom: 20px;">
-                            <li><strong>Ph.D.</strong> in [전공], [대학 이름] (Year)</li>
-                            <li><strong>M.S.</strong> in [전공], [대학 이름] (Year)</li>
-                        </ul>
-                    </div>
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.4rem;">Education</h3>
+                    <ul class="education-list">
+                        <li>
+                            <strong>Ph.D. in Civil Engineering</strong>
+                            <span>Texas A&M University, College Station, TX, USA (Year)</span>
+                        </li>
+                        <li>
+                            <strong>M.S. in Architectural Engineering</strong>
+                            <span>Hanyang University (Seoul Campus), Seoul, Korea (Year)</span>
+                        </li>
+                        <li>
+                            <strong>B.S. in Architectural Engineering</strong>
+                            <span>Hanyang University (ERICA Campus), Ansan, Korea (Year)</span>
+                        </li>
+                    </ul>
 
-                    <a href="cv.pdf" class="btn" target="_blank"><i class="fas fa-file-pdf"></i> Download CV</a>
+                    <a href="cv.pdf" class="btn" target="_blank"><i class="fas fa-file-pdf"></i> Download Full CV</a>
                 </div>
             </div>
         </section>
@@ -152,12 +183,12 @@
         <section id="research">
             <h2 class="section-title">Research Interests</h2>
             <div class="card">
-                <h3><i class="fas fa-microscope"></i> 연구 주제 1: [Topic Title]</h3>
-                <p>이 연구 주제에 대한 간략한 설명을 작성하세요. 이 연구가 왜 중요하고 어떤 임팩트가 있는지 2-3문장으로 요약합니다.</p>
+                <h3><i class="fas fa-building"></i> Structural Resilience & Design</h3>
+                <p>Describe your research on structural integrity, sustainable building materials, or urban resilience against natural disasters.</p>
             </div>
             <div class="card">
-                <h3><i class="fas fa-chart-line"></i> 연구 주제 2: [Topic Title]</h3>
-                <p>두 번째 연구 주제에 대한 설명입니다. 방법론이나 주요 발견 사항을 강조하면 좋습니다.</p>
+                <h3><i class="fas fa-drafting-compass"></i> Smart Construction & Tech</h3>
+                <p>Explain your work regarding BIM, smart city infrastructure, or data-driven construction management methods.</p>
             </div>
         </section>
 
@@ -165,18 +196,18 @@
             <h2 class="section-title">Selected Publications</h2>
             
             <div class="card">
-                <h3>Title of the Impactful Paper</h3>
-                <p class="pub-meta"><strong>Your Name</strong>, Co-author 1, Co-author 2. <em>Journal Name</em>, 2024.</p>
-                <div style="margin-top: 10px;">
+                <h3>Paper Title Regarding Civil Engineering</h3>
+                <p class="pub-meta"><strong>Jerry [Last Name]</strong>, Co-author. <em>Journal of Structural Engineering</em>, 2025.</p>
+                <div>
                     <a href="#" style="color: var(--primary-color); font-weight: bold;">[PDF]</a> &nbsp;
-                    <a href="#" style="color: var(--primary-color); font-weight: bold;">[Link]</a>
+                    <a href="#" style="color: var(--primary-color); font-weight: bold;">[DOI]</a>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Another Great Research Paper</h3>
-                <p class="pub-meta">Co-author 1, <strong>Your Name</strong>. <em>Conference Proceedings</em>, 2023.</p>
-                <div style="margin-top: 10px;">
+                <h3>Another Significant Research Paper</h3>
+                <p class="pub-meta">Co-author, <strong>Jerry [Last Name]</strong>. <em>Building and Environment</em>, 2024.</p>
+                <div>
                     <a href="#" style="color: var(--primary-color); font-weight: bold;">[PDF]</a>
                 </div>
             </div>
@@ -184,18 +215,21 @@
 
         <section id="contact">
             <h2 class="section-title">Contact</h2>
-            <p>연구 협업이나 문의 사항은 언제든지 환영합니다.</p>
-            <div style="margin-top: 20px; font-size: 1.1rem;">
-                <p><i class="fas fa-envelope"></i> email@university.edu</p>
-                <p><i class="fas fa-map-marker-alt"></i> Building 123, University Name</p>
+            <p>I am open to academic collaborations and research discussions.</p>
+            <div style="margin-top: 20px; font-size: 1.1rem; line-height: 2;">
+                <p><i class="fas fa-envelope" style="color:var(--primary-color); width:25px;"></i> your.email@tamu.edu</p>
+                <p><i class="fas fa-map-marker-alt" style="color:var(--primary-color); width:25px;"></i> Department of Civil Engineering, [Building Name]</p>
             </div>
         </section>
     </div>
 
     <footer>
         <div class="social-icons">
-            <a href="#"><i class="fab fa-google"></i></a> <a href="#"><i class="fab fa-linkedin"></i></a> <a href="#"><i class="fab fa-twitter"></i></a> </div>
-        <p style="margin-top: 10px; font-size: 0.8rem;">&copy; 2025 Dr. Your Name. All rights reserved.</p>
+            <a href="#" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.85rem;">&copy; 2025 Dr. Jerry. All rights reserved.</p>
     </footer>
 
 </body>
