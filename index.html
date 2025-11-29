@@ -3,361 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Jangjae Lee | The Portfolio</title>
-    
+    <title>Dr. Jangjae Lee | Postdoctoral Research Fellow</title>
+    <meta name="description" content="Academic Portfolio of Dr. Jangjae Lee, Infrastructure Resilience and Machine Learning Researcher at University of Houston.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* --- DESIGN SYSTEM: "The Academic Vogue" --- */
+        /* --- 1. Design Tokens (Professional Academic Theme) --- */
         :root {
-            --bg-paper: #F3F2EE; /* warm, expensive paper feel */
-            --ink-black: #111111;
-            --brand-burgundy: #420000; /* Deep, luxury dark red */
-            --accent-gold: #D4AF37; /* Subtle metallic accent */
-            --text-grey: #555555;
+            /* Palette: Dark Slate Blue & Crisp White */
+            --sidebar-bg: #1e293b; 
+            --sidebar-text: #f8fafc;
+            --primary: #0f172a; 
+            --accent: #2563eb; /* Academic Blue */
+            --accent-hover: #1d4ed8;
+            --text-body: #475569;
+            --bg-main: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
             
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Manrope', sans-serif;
-            
-            --padding-x: 8vw;
+            --width-sidebar: 300px;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Merriweather', serif;
         }
 
-        /* --- RESET & BASE --- */
+        /* --- 2. Base Reset --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        
+        html { scroll-behavior: smooth; }
         body { 
-            background-color: var(--bg-paper); 
-            color: var(--ink-black);
-            font-family: var(--font-sans);
-            line-height: 1.7;
-            overflow-x: hidden;
+            font-family: var(--font-sans); 
+            color: var(--text-body); 
+            line-height: 1.7; 
+            background: var(--bg-main);
+            display: flex;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
-        ul { list-style: none; }
+        a { text-decoration: none; color: var(--accent); transition: 0.2s; }
+        a:hover { color: var(--accent-hover); }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
+        /* --- 3. Sidebar (Left Navigation) --- */
+        header {
+            width: var(--width-sidebar);
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .profile-section { text-align: center; }
         
-        .display-text {
-            font-size: clamp(3rem, 8vw, 7rem);
-            line-height: 0.9;
-            letter-spacing: -0.03em;
-            color: var(--brand-burgundy);
+        /* 1. Profile Image (Headshot) */
+        .profile-img-wrapper {
+            width: 140px; height: 140px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.1);
+            background: #fff;
         }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .profile-name { 
+            font-family: var(--font-serif); 
+            font-weight: 700; 
+            font-size: 1.4rem; 
+            margin-bottom: 5px; 
+            color: #fff;
+        }
+        .profile-role { 
+            font-size: 0.9rem; 
+            opacity: 0.8; 
+            margin-bottom: 25px; 
+            font-weight: 300; 
+        }
+
+        /* Navigation Menu */
+        .nav-menu { list-style: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .nav-menu li { margin-bottom: 8px; }
+        .nav-menu a {
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+        .nav-menu a i { width: 25px; text-align: center; margin-right: 10px; }
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .sidebar-footer { font-size: 0.8rem; opacity: 0.5; text-align: center; margin-top: 30px; }
+
+        /* --- 4. Main Content (Right Side) --- */
+        main {
+            margin-left: var(--width-sidebar);
+            width: calc(100% - var(--width-sidebar));
+            min-height: 100vh;
+        }
+
+        .section { padding: 80px 60px; border-bottom: 1px solid var(--border); }
+        .section:last-child { border-bottom: none; }
+        .bg-alt { background-color: var(--bg-alt); }
 
         .section-title {
-            font-size: 3rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 20px;
-            margin-bottom: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .section-title span {
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-grey);
-        }
-
-        /* --- LAYOUT UTILS --- */
-        .container { padding: 0 var(--padding-x); max-width: 1600px; margin: 0 auto; }
-        .section { padding: 120px 0; }
-
-        /* --- NAVIGATION (Minimalist Sticky) --- */
-        nav {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 30px var(--padding-x);
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            mix-blend-mode: difference; /* Stylish overlay effect */
-            color: #fff; /* Inverted due to difference mode */
-        }
-        .nav-logo { font-family: var(--font-serif); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { 
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; 
-            position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: #fff; transition: 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* --- HERO SECTION (Magazine Cover Style) --- */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 0;
-            position: relative;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .hero-content {
-            padding: 0 var(--padding-x);
-            z-index: 2;
-        }
-
-        .role-tag {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            border: 1px solid var(--ink-black);
-            padding: 8px 16px;
-            border-radius: 50px;
-        }
-
-        .hero-image-container {
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            background: #e0e0e0;
-        }
-        
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Filter for that "Film Photography" look */
-            filter: grayscale(100%) contrast(1.1); 
-            transition: transform 1.5s ease;
-        }
-        .hero:hover .hero-image { transform: scale(1.05); filter: grayscale(0%); }
-
-        /* --- STATS / QUICK INFO BAR --- */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        .stat-item {
-            padding: 40px var(--padding-x);
-            border-right: 1px solid rgba(0,0,0,0.1);
-        }
-        .stat-item:last-child { border-right: none; }
-        .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-grey); display: block; margin-bottom: 10px; }
-        .stat-value { font-family: var(--font-serif); font-size: 1.5rem; color: var(--brand-burgundy); }
-
-        /* --- EXPERIENCE (Editorial Timeline) --- */
-        .resume-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-        .resume-period {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--text-grey);
-            font-style: italic;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
         }
-        .resume-details h3 { font-size: 2rem; margin-bottom: 10px; }
-        .resume-details .place { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--brand-burgundy); margin-bottom: 20px; display: block; }
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 60px; height: 3px; background: var(--accent);
+        }
 
-        /* --- PUBLICATIONS (Minimalist List) --- */
-        .pub-item {
-            padding: 30px 0;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 80px 1fr auto;
-            gap: 30px;
-            align-items: baseline;
-            transition: 0.3s;
-        }
-        .pub-item:hover { background: #fff; padding-left: 20px; padding-right: 20px; transform: scale(1.01); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .pub-index { font-family: var(--font-serif); font-size: 1.5rem; color: var(--brand-burgundy); opacity: 0.5; }
-        .pub-info h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
-        .pub-meta { font-size: 0.9rem; color: var(--text-grey); }
-        .pub-link { font-size: 1.5rem; color: var(--text-grey); }
-
-        /* --- FOOTER (Big Typo) --- */
-        footer {
-            background: var(--ink-black);
-            color: #fff;
-            padding: 100px var(--padding-x);
-            text-align: center;
-        }
-        .footer-cta { font-family: var(--font-serif); font-size: 4vw; margin-bottom: 40px; line-height: 1.2; }
-        .social-row { display: flex; justify-content: center; gap: 40px; font-size: 1.2rem; }
+        /* --- 5. Components --- */
         
-        /* Mobile */
+        /* About Grid (Text + Bio Image) */
+        .about-grid { display: grid; grid-template-columns: 1fr 350px; gap: 50px; align-items: start; }
+        
+        .intro h1 { font-family: var(--font-serif); font-size: 2.8rem; color: var(--primary); margin-bottom: 20px; line-height: 1.2; }
+        .intro p { font-size: 1.05rem; margin-bottom: 20px; color: var(--text-body); }
+        
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover { background: var(--accent-hover); color: #fff; transform: translateY(-2px); }
+
+        .contact-row { display: flex; gap: 20px; margin-top: 20px; font-size: 0.95rem; }
+        .contact-item { display: flex; align-items: center; gap: 8px; }
+        .contact-item i { color: var(--accent); }
+
+        /* Bio Image */
+        .bio-img-wrapper img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        /* Timeline Items */
+        .timeline-item { display: grid; grid-template-columns: 180px 1fr; gap: 30px; margin-bottom: 35px; }
+        .timeline-date { font-weight: 600; color: var(--primary); font-size: 0.95rem; text-align: right; padding-top: 5px; }
+        .timeline-content h3 { font-size: 1.25rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .timeline-content .org { font-style: italic; color: #64748b; margin-bottom: 10px; display: block; font-weight: 500; }
+        .highlight-badge { 
+            background: #e0f2fe; color: #0369a1; 
+            padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;
+            display: inline-block; margin-top: 5px;
+        }
+
+        /* Publications */
+        .pub-list { list-style: none; }
+        .pub-item { margin-bottom: 25px; padding-left: 20px; border-left: 3px solid var(--border); transition: 0.2s; }
+        .pub-item:hover { border-left-color: var(--accent); background: #f8fafc; }
+        .tag-badge { 
+            font-size: 0.75rem; text-transform: uppercase; font-weight: 700; 
+            color: var(--accent); margin-right: 8px; letter-spacing: 0.5px;
+        }
+        .pub-title { font-weight: 700; color: var(--primary); font-family: var(--font-serif); font-size: 1.1rem; }
+        .pub-authors { font-size: 0.95rem; margin-top: 5px; color: var(--text-body); }
+        .pub-venue { font-style: italic; font-size: 0.9rem; color: #64748b; margin-top: 2px; }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .skill-box h4 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .skill-tags span {
+            display: inline-block; background: #fff; border: 1px solid #cbd5e1;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.9rem; margin: 0 5px 8px 0;
+            color: var(--text-body);
+        }
+
+        /* --- 6. Responsive --- */
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; grid-template-rows: auto 50vh; }
-            .hero-content { padding: 100px var(--padding-x) 40px; }
-            .display-text { font-size: 3.5rem; }
-            .resume-grid { grid-template-columns: 1fr; gap: 20px; }
-            .stats-bar { grid-template-columns: 1fr; }
-            .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); }
-            .pub-item { grid-template-columns: 1fr; gap: 10px; }
-            .nav-links { display: none; } /* Simplified for mobile */
+            body { flex-direction: column; }
+            header { 
+                width: 100%; height: auto; position: relative; 
+                padding: 30px 20px; text-align: center;
+            }
+            main { margin-left: 0; width: 100%; }
+            .nav-menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; border-top: none; }
+            .section { padding: 60px 20px; }
+            
+            /* Responsive Grid adjustments */
+            .about-grid { grid-template-columns: 1fr; gap: 30px; }
+            .bio-img-wrapper { order: -1; max-width: 300px; margin: 0 auto; }
+            
+            .timeline-item { grid-template-columns: 1fr; gap: 5px; }
+            .timeline-date { text-align: left; color: var(--accent); margin-bottom: 5px; }
+            .contact-row { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-logo">JL.</div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#research">Research</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-content">
-            <span class="role-tag">Ph.D. / Researcher / Engineer</span>
-            <h1 class="display-text">Jangjae<br>Lee.</h1>
-            <p style="margin-top: 30px; font-size: 1.1rem; max-width: 400px; color: var(--text-grey);">
-                Constructing the future of infrastructure resilience through the lens of data science and machine intelligence.
-            </p>
-            <div style="margin-top: 50px;">
-                <a href="cv_1105_2025.pdf" target="_blank" style="border-bottom: 2px solid var(--brand-burgundy); padding-bottom: 5px; font-weight: 600;">VIEW CURRICULUM VITAE &rarr;</a>
+    <header>
+        <div class="profile-section">
+            <div class="profile-img-wrapper">
+                <img src="assets/profile.jpg" 
+                     onerror="this.src='https://ui-avatars.com/api/?name=Jangjae+Lee&background=2563eb&color=fff&size=200'" 
+                     alt="Dr. Jangjae Lee Headshot" 
+                     class="profile-img">
             </div>
+            <h1 class="profile-name">Jangjae Lee, Ph.D.</h1>
+            <p class="profile-role">Postdoctoral Research Fellow<br>University of Houston</p>
+            
+            <ul class="nav-menu">
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="#publications"><i class="fas fa-book"></i> Publications</a></li>
+                <li><a href="#awards"><i class="fas fa-trophy"></i> Awards</a></li>
+            </ul>
         </div>
-        <div class="hero-image-container">
-            <img src="https://placehold.co/800x1200/2D0000/FFFFFF?text=Dr.+Lee+Portrait" 
-                 onerror="this.src='assets/profile.jpg'" 
-                 alt="Portrait of Dr. Jangjae Lee" 
-                 class="hero-image">
-        </div>
-    </section>
 
-    <div class="stats-bar">
-        <div class="stat-item">
-            <span class="stat-label">Current Role</span>
-            <div class="stat-value">Postdoctoral Fellow</div>
-            <small style="color:var(--text-grey)">University of Houston</small>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Specialization</span>
-            <div class="stat-value">Resilience AI</div>
-            <small style="color:var(--text-grey)">Infrastructure & Grid Analytics</small>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Alumni</span>
-            <div class="stat-value">Texas A&M</div>
-            <small style="color:var(--text-grey)">Ph.D. in Civil Engineering</small>
-        </div>
-    </div>
-
-    <section id="about" class="section container">
-        <h2 class="section-title">
-            Editorial Note
-            <span>01 / Introduction</span>
-        </h2>
-        <div style="column-count: 1; max-width: 800px; font-size: 1.25rem; line-height: 1.8;">
-            <p style="margin-bottom: 30px;">
-                <span style="font-size: 3rem; float: left; line-height: 0.8; margin-right: 15px; font-family: var(--font-serif); color: var(--brand-burgundy);">I</span>
-                am a Postdoctoral Research Fellow at the University of Houston, standing at the convergence of civil engineering and advanced data analytics.
-            </p>
-            <p style="color: var(--text-grey); font-size: 1.1rem;">
-                My work is not merely about predicting outages; it is about architectural foresight. Using LiDAR, machine vision, and extreme climate modeling, I design the frameworks that keep our cities standing when nature strikes its hardest. From the Grid Resilience group at Oak Ridge National Laboratory to the doctoral labs of Texas A&M, my career has been dedicated to one question: <em>How do we make the built environment unbreakable?</em>
-            </p>
-        </div>
-    </section>
-
-    <section id="experience" class="section container" style="background: #fff; margin-top: 60px; padding: 120px var(--padding-x);">
-        <h2 class="section-title">
-            Career Timeline
-            <span>02 / Experience</span>
-        </h2>
-
-        <div class="resume-grid">
-            <div class="resume-period">2025 &mdash; Present</div>
-            <div class="resume-details">
-                <h3>Postdoctoral Research Fellow</h3>
-                <span class="place">University of Houston</span>
-                <p>Leading research on infrastructure resilience using big data analytics. Transforming raw 311 reports and machine vision data into actionable survival strategies for coastal communities.</p>
+        <div class="sidebar-footer">
+            <div style="font-size: 1.2rem; margin-bottom: 10px;">
+                <a href="https://www.linkedin.com/in/jangjlee10" target="_blank" style="color:#fff; margin:0 8px;"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Jerry03120" target="_blank" style="color:#fff; margin:0 8px;"><i class="fab fa-github"></i></a>
+                <a href="mailto:jlee277@central.uh.edu" style="color:#fff; margin:0 8px;"><i class="fas fa-envelope"></i></a>
             </div>
+            &copy; 2025 Jangjae Lee
         </div>
+    </header>
 
-        <div class="resume-grid">
-            <div class="resume-period">Summer 2024</div>
-            <div class="resume-details">
-                <h3>Research Intern</h3>
-                <span class="place">Oak Ridge National Laboratory (ORNL)</span>
-                <p>Deployed interpretable machine learning models for national-scale power grid resilience. Worked within the elite Grid Resilience Research Group to forecast impact.</p>
-            </div>
-        </div>
+    <main>
+        
+        <section id="about" class="section">
+            <div class="about-grid">
+                
+                <div class="intro">
+                    <h1>Building Resilient Infrastructure<br>through Data Science.</h1>
+                    <p>
+                        I am a <strong>Postdoctoral Research Fellow</strong> in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>, working with Dr. Abigail L. Beck.
+                    </p>
+                    <p>
+                        My research operates at the intersection of civil engineering and data science. I develop comprehensive data-driven frameworks for <strong>infrastructure and community resilience assessment</strong> by integrating multi-source data—ranging from LiDAR and machine vision to meteorological datasets.
+                    </p>
+                    
+                    <div class="contact-row">
+                        <span class="contact-item"><i class="fas fa-map-marker-alt"></i> Houston, TX, USA</span>
+                        <span class="contact-item"><i class="fas fa-envelope"></i> jlee277@central.uh.edu</span>
+                    </div>
 
-        <div class="resume-grid">
-            <div class="resume-period">2022 &mdash; 2025</div>
-            <div class="resume-details">
-                <h3>Doctoral Researcher</h3>
-                <span class="place">Texas A&M University</span>
-                <p>Dissertation: Machine Learning-Based Decision Support. Architected the frameworks that predict power outages in Texas under extreme climate stress.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="research" class="section container">
-        <h2 class="section-title">
-            Selected Works
-            <span>03 / Publications</span>
-        </h2>
-
-        <div class="pub-list">
-            <a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank" class="pub-item">
-                <div class="pub-index">01</div>
-                <div class="pub-info">
-                    <h4>A data-driven approach to predicting power outages during winter storms</h4>
-                    <div class="pub-meta">Computational Urban Science (2025) &bull; <strong>J. Lee</strong> et al.</div>
+                    <a href="cv_1105_2025.pdf" target="_blank" class="btn-primary">
+                        <i class="fas fa-file-download"></i> Download Full CV
+                    </a>
                 </div>
-                <div class="pub-link"><i class="fas fa-arrow-right"></i></div>
-            </a>
 
-            <a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank" class="pub-item">
-                <div class="pub-index">02</div>
-                <div class="pub-info">
-                    <h4>A near-real-time model for predicting electricity disruptions in Texas</h4>
-                    <div class="pub-meta">IEEE Access (2025) &bull; <strong>J. Lee</strong> et al.</div>
+                <div class="bio-img-wrapper">
+                    <img src="assets/Jangjae Lee_Bio.png" 
+                         onerror="this.src='https://via.placeholder.com/350x450?text=Bio+Image+Placeholer'" 
+                         alt="Jangjae Lee Bio">
                 </div>
-                <div class="pub-link"><i class="fas fa-arrow-right"></i></div>
-            </a>
-
-            <div class="pub-item" style="opacity: 0.6;">
-                <div class="pub-index">03</div>
-                <div class="pub-info">
-                    <h4>An integrated model for predicting power outages (Under Revision)</h4>
-                    <div class="pub-meta">Manucript in Progress</div>
-                </div>
-                <div class="pub-link"><i class="fas fa-clock"></i></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <footer>
-            <p style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem;">Let's Collaborate</p>
-            <div class="footer-cta">
-                <a href="mailto:jlee277@central.uh.edu" style="border-bottom: 2px solid #fff;">jlee277@central.uh.edu</a>
+        <section class="section bg-alt">
+            <h2 class="section-title">Research Interests</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h4>Core Areas</h4>
+                    <div class="skill-tags">
+                        <span>Infrastructure Resilience</span>
+                        <span>Power Grid Analytics</span>
+                        <span>Climate-Informed Risk Modeling</span>
+                        <span>Community Resilience</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Methodologies</h4>
+                    <div class="skill-tags">
+                        <span>Machine Learning (XGBoost, LightGBM)</span>
+                        <span>Computer Vision</span>
+                        <span>LiDAR Data Fusion</span>
+                        <span>Explainable AI (SHAP)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Sep 2025 – Present</div>
+                <div class="timeline-content">
+                    <h3>Postdoctoral Research Fellow</h3>
+                    <span class="org">University of Houston, Houston, TX</span>
+                    <p>Principal Investigator: Dr. Abigail L. Beck. Developing frameworks for infrastructure resilience using big data analytics (311 reports, machine vision). Focus on coastal regions and field-based validation.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">May 2024 – Aug 2024</div>
+                <div class="timeline-content">
+                    <h3>Research Intern</h3>
+                    <span class="org">Oak Ridge National Laboratory (ORNL), Oak Ridge, TN</span>
+                    <p>Grid Resilience Research Group. Developed interpretable ML models for critical energy infrastructure systems and national-scale impact analysis.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jan 2022 – Aug 2025</div>
+                <div class="timeline-content">
+                    <h3>Doctoral Researcher</h3>
+                    <span class="org">Texas A&M University, College Station, TX</span>
+                    <p>Advisor: Dr. Stephanie G. Paal. Architected ML frameworks for large-scale power outage prediction across nine U.S. states utilizing Bayesian optimization and explainable AI.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section bg-alt">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2020 – 2025</div>
+                <div class="timeline-content">
+                    <h3>Ph.D. in Civil Engineering</h3>
+                    <span class="org">Texas A&M University, College Station, TX</span>
+                    <p>Dissertation: <em>Machine Learning-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions</em></p>
+                    <span class="highlight-badge">Dissertation Fellowship</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2016 – 2018</div>
+                <div class="timeline-content">
+                    <h3>M.S. in Architectural Engineering</h3>
+                    <span class="org">Hanyang University (Seoul), South Korea</span>
+                    <p>Thesis: <em>Seismic Performance of Exterior Beam-Column Joint Subassemblies Reinforced with Steel Fibers</em> (GPA: 4.25/4.5)</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2010 – 2016</div>
+                <div class="timeline-content">
+                    <h3>B.S. in Architectural Engineering</h3>
+                    <span class="org">Hanyang University (ERICA), South Korea</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="section">
+            <h2 class="section-title">Selected Publications</h2>
+            
+            <ul class="pub-list">
+                <li class="pub-item">
+                    <span class="tag-badge">[Journal]</span>
+                    <a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank" class="pub-title">A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models</a>
+                    <div class="pub-authors"><strong>Lee, J.</strong>, Zhang, Z., & Paal, S.G. (2025)</div>
+                    <div class="pub-venue">Computational Urban Science, Springer</div>
+                </li>
+
+                <li class="pub-item">
+                    <span class="tag-badge">[Journal]</span>
+                    <a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank" class="pub-title">A near-real-time model for predicting electricity disruptions in Texas during winter storms</a>
+                    <div class="pub-authors"><strong>Lee, J.</strong>, Lee, S.M., Chinthavali, S., & Paal, S.G. (2025)</div>
+                    <div class="pub-venue">IEEE Access, 13, 139583-139603</div>
+                </li>
+
+                <li class="pub-item">
+                    <span class="tag-badge">[Conference]</span>
+                    <a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank" class="pub-title">A generalized outage prediction model for various types of extreme climate events in Texas</a>
+                    <div class="pub-venue">2024 IEEE International Conference on Big Data (BigData)</div>
+                </li>
+
+                <li class="pub-item">
+                    <span class="tag-badge">[Journal]</span>
+                    <a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank" class="pub-title">Shear strength of steel fiber-reinforced concrete exterior beam-column joints with various anchorage details</a>
+                    <div class="pub-authors">Son, D.H., Bae, B.I., <strong>Lee, J.</strong>, & Choi, C.S. (2024)</div>
+                    <div class="pub-venue">Structures, 61, 105940</div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="awards" class="section bg-alt">
+            <h2 class="section-title">Honors & Awards</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2024 – 2025</div>
+                <div class="timeline-content">
+                    <h3>Dissertation Fellowship</h3>
+                    <span class="org">Texas A&M University</span>
+                </div>
             </div>
             
-            <div class="social-row">
-                <a href="https://www.linkedin.com/in/jangjlee10" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Jerry03120" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+            <div class="timeline-item">
+                <div class="timeline-date">2020 – 2024</div>
+                <div class="timeline-content">
+                    <h3>Excellence Fellowship</h3>
+                    <span class="org">Texas A&M University</span>
+                </div>
             </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2016 – 2018</div>
+                <div class="timeline-content">
+                    <h3>HY-in Scholarship</h3>
+                    <span class="org">Hanyang University</span>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2015</div>
+                <div class="timeline-content">
+                    <h3>Grand Prize</h3>
+                    <span class="org">Korea Institute of Building Construction Design Contest</span>
+                </div>
+            </div>
+        </section>
 
-            <p style="margin-top: 60px; color: #555; font-size: 0.8rem;">
-                &copy; 2025 Dr. Jangjae Lee. Design inspired by Editorial Aesthetics.
-            </p>
-        </footer>
-    </section>
+        <section class="section" style="text-align: center; font-size: 0.9rem; color: #888;">
+            <p>Last updated: November 2025</p>
+        </section>
 
+    </main>
 </body>
 </html>
