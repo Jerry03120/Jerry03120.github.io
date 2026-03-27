@@ -136,7 +136,7 @@
       min-height: 100vh; display: flex; align-items: center; padding-top: 90px;
     }
     .hero-grid {
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 34px; align-items: center;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center;
     }
     .hero h1 {
       font-size: clamp(3rem, 8vw, 7rem);
@@ -161,7 +161,7 @@
 
     .hero-stage {
       perspective: 1400px;
-      min-height: 660px;
+      min-height: 700px;
       position: relative;
     }
     .glass-card {
@@ -175,8 +175,8 @@
       transform-style: preserve-3d;
     }
     .card-main {
-      width: min(520px, 92vw); height: 560px; right: 0; top: 20px;
-      padding: 26px;
+      width: min(540px, 92vw); height: 590px; right: 0; top: 10px;
+      padding: 22px;
       transform: rotateY(-18deg) rotateX(8deg);
     }
     .card-small {
@@ -184,27 +184,74 @@
       transform: rotateY(20deg) rotateX(-3deg) translateZ(40px);
     }
     .card-floating {
-      width: 240px; height: 200px; right: 30px; bottom: -10px; padding: 18px;
+      width: 250px; height: 200px; right: 20px; bottom: -16px; padding: 18px;
       transform: rotateY(-14deg) rotateX(6deg) translateZ(50px);
     }
     .screen {
-      height: 100%; border-radius: 24px; padding: 20px;
+      height: 100%; border-radius: 24px; padding: 18px;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
         radial-gradient(circle at 20% 20%, rgba(125,211,252,0.25), transparent 28%),
         radial-gradient(circle at 85% 10%, rgba(167,139,250,0.18), transparent 24%),
         #09111a;
       border: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; gap: 18px;
+      display: flex; flex-direction: column; gap: 16px;
     }
     .screen-top { display: flex; justify-content: space-between; align-items: center; }
     .dots { display: flex; gap: 8px; }
     .dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.3); }
     .mini-label { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .18em; }
+
+    .profile-hero {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      min-height: 100%;
+      align-items: stretch;
+    }
+    .profile-photo-wrap {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(125,211,252,0.28), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(167,139,250,0.24), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 420px;
+    }
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transform: scale(1.02);
+    }
+    .profile-overlay {
+      position: absolute;
+      inset: auto 14px 14px 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(3,9,18,0.48);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+    }
+    .profile-overlay h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+    .profile-overlay p {
+      color: var(--soft);
+      font-size: .92rem;
+      line-height: 1.6;
+    }
+
     .headline-panel {
       padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
     }
-    .headline-panel h3 { font-size: 1.6rem; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 10px; }
+    .headline-panel h3 { font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 10px; }
     .headline-panel p { color: var(--soft); line-height: 1.7; }
     .bars { display: grid; gap: 10px; margin-top: auto; }
     .bar {
@@ -335,7 +382,7 @@
 
     @media (max-width: 1100px) {
       .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .hero-stage { min-height: 620px; }
+      .hero-stage { min-height: 700px; }
       .card-main { left: 50%; transform: translateX(-50%) rotateY(-8deg) rotateX(5deg); }
       .card-small { left: 0; bottom: 35px; }
       .card-floating { right: 0; }
@@ -348,13 +395,20 @@
       .section { padding: 96px 18px; }
       .hero-metrics { grid-template-columns: 1fr; }
       .timeline-card { grid-template-columns: 1fr; gap: 12px; }
-      .hero-stage { min-height: 580px; }
+      .hero-stage { min-height: 650px; }
       .card-main {
         width: 100%;
-        height: 460px;
+        height: auto;
+        min-height: 560px;
         right: auto;
         left: 0;
         transform: none;
+      }
+      .profile-hero {
+        grid-template-columns: 1fr;
+      }
+      .profile-photo-wrap {
+        min-height: 320px;
       }
       .card-small, .card-floating { display: none; }
       .hero h1 { max-width: 100%; }
@@ -397,7 +451,7 @@
             Jangjae Lee is a Postdoctoral Research Fellow at the University of Houston working at the intersection of infrastructure resilience, climate risk, machine learning, and computer vision.
           </p>
           <p class="lead">
-            His work spans real-time power outage prediction, utility pole condition assessment with vision and LiDAR, and community resilience modeling using large-scale spatial and urban data. This landing page translates the academic CV into a cinematic, Apple-inspired digital portfolio.
+            His work spans real-time power outage prediction, utility pole condition assessment with vision and LiDAR, and community resilience modeling using large-scale spatial and urban data.
           </p>
           <div style="display:flex; gap:14px; flex-wrap:wrap;">
             <a class="btn btn-primary" href="#publications">View Publications</a>
@@ -406,16 +460,16 @@
 
           <div class="hero-metrics">
             <div class="metric tilt">
-              <strong>10+</strong>
-              <span>Research outputs and conference papers</span>
+              <strong>2025–</strong>
+              <span>Postdoctoral Research Fellow at UH</span>
             </div>
             <div class="metric tilt">
-              <strong>3</strong>
-              <span>Core domains: resilience, ML, structural systems</span>
+              <strong>ML + CV</strong>
+              <span>Resilience, outage prediction, LiDAR fusion</span>
             </div>
             <div class="metric tilt">
-              <strong>2026</strong>
-              <span>Current postdoctoral appointment at UH</span>
+              <strong>Ph.D.</strong>
+              <span>Texas A&amp;M University, Civil Engineering</span>
             </div>
           </div>
         </div>
@@ -427,22 +481,42 @@
                 <div class="dots"><span></span><span></span><span></span></div>
                 <div class="mini-label">Research profile</div>
               </div>
-              <div class="headline-panel">
-                <h3>Data-driven models for resilient infrastructure systems.</h3>
-                <p>
-                  Predicting climate-induced power outages, evaluating pole deterioration, and understanding community-level vulnerability through interpretable machine learning and spatial analytics.
-                </p>
-              </div>
-              <div class="headline-panel">
-                <h3>Current focus</h3>
-                <p>
-                  Coastal utility pole inspection with Grounded SAM and LiDAR, extreme weather outage forecasting, and big-data-informed resilience assessment.
-                </p>
-              </div>
-              <div class="bars">
-                <div class="bar"><span style="width: 92%;"></span></div>
-                <div class="bar"><span style="width: 84%;"></span></div>
-                <div class="bar"><span style="width: 78%;"></span></div>
+
+              <div class="profile-hero">
+                <div class="profile-photo-wrap">
+                  <img
+                    src="assets/profile.jpg"
+                    alt="Portrait of Jangjae Lee"
+                    class="profile-photo"
+                    onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Jangjae+Lee&background=0b1220&color=f5f7fb&size=800';"
+                  />
+                  <div class="profile-overlay">
+                    <h3>Jangjae Lee</h3>
+                    <p>Postdoctoral Research Fellow · University of Houston</p>
+                  </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:16px;">
+                  <div class="headline-panel">
+                    <h3>Data-driven models for resilient infrastructure systems.</h3>
+                    <p>
+                      Predicting climate-induced power outages, evaluating pole deterioration, and understanding community-level vulnerability through interpretable machine learning and spatial analytics.
+                    </p>
+                  </div>
+
+                  <div class="headline-panel">
+                    <h3>Current focus</h3>
+                    <p>
+                      Coastal utility pole inspection with Grounded SAM and LiDAR, extreme weather outage forecasting, and big-data-informed resilience assessment.
+                    </p>
+                  </div>
+
+                  <div class="bars">
+                    <div class="bar"><span style="width: 92%;"></span></div>
+                    <div class="bar"><span style="width: 84%;"></span></div>
+                    <div class="bar"><span style="width: 78%;"></span></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -452,7 +526,7 @@
               <div class="mini-label">Affiliation</div>
               <div class="headline-panel" style="margin-top:auto;">
                 <h3 style="font-size:1.15rem;">University of Houston</h3>
-                <p style="font-size:.95rem;">Postdoctoral Research Fellow in Civil &amp; Environmental Engineering</p>
+                <p style="font-size:.95rem;">Department of Civil and Environmental Engineering</p>
               </div>
             </div>
           </div>
@@ -477,51 +551,62 @@
         <div class="section-heading" data-reveal>
           <h2>Experience grounded in research, modeling, and impact.</h2>
           <p>
-            The portfolio structure below reflects the uploaded CV more fully than the original HTML, with expanded roles, research areas, and educational background.
+            This section reflects the uploaded CV with professional appointments, education, and research direction aligned to the most current version.
           </p>
         </div>
 
         <div class="timeline">
           <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">2025 – Present</div>
+            <div class="timeline-date">Sep 2025 – Present</div>
             <div class="timeline-body">
               <h3>Postdoctoral Research Fellow</h3>
               <h4>University of Houston · Department of Civil and Environmental Engineering</h4>
               <p>
-                Conducting research on infrastructure resilience and machine learning with an emphasis on utility systems, coastal infrastructure assessment, and decision-support under hazardous climate events.
+                Developing data-driven frameworks for infrastructure and community resilience assessment by integrating 311 service requests, LiDAR, machine vision, meteorological, and census data. Research includes infrastructure quality estimation, outage impact modeling, and field-based validation across multiple infrastructure systems.
               </p>
             </div>
           </article>
 
           <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">2024 – 2025</div>
+            <div class="timeline-date">May 2024 – Aug 2024</div>
             <div class="timeline-body">
-              <h3>Research Associate</h3>
-              <h4>Oak Ridge National Laboratory (ORNL)</h4>
+              <h3>Research Intern</h3>
+              <h4>Oak Ridge National Laboratory (ORNL) · Geospatial Science and Human Security Division</h4>
               <p>
-                Worked on data-driven outage prediction and infrastructure analytics projects connecting machine learning, electric power system resilience, and regional climate hazard impacts.
+                Conducted national-scale power grid resilience analysis within the Grid Resilience Research group. Developed interpretable machine learning models for critical energy infrastructure systems and contributed to peer-reviewed publications on resilience enhancement.
               </p>
             </div>
           </article>
 
           <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">2020 – 2024</div>
+            <div class="timeline-date">Aug 2020 – Aug 2025</div>
             <div class="timeline-body">
               <h3>Ph.D. in Civil Engineering</h3>
               <h4>Texas A&amp;M University</h4>
               <p>
-                Developed interdisciplinary research spanning structural engineering, hazard modeling, interpretable machine learning, and resilient infrastructure systems. Also served in teaching and mentorship roles across multiple engineering courses.
+                Dissertation: <em>ML-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions</em>. Advisor: Dr. Stephanie G. Paal.
               </p>
             </div>
           </article>
 
           <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">2018 – 2020</div>
+            <div class="timeline-date">Mar 2016 – Aug 2018</div>
             <div class="timeline-body">
-              <h3>M.S. in Civil Engineering</h3>
-              <h4>Texas A&amp;M University</h4>
+              <h3>M.S. in Architectural Engineering</h3>
+              <h4>Hanyang University (Seoul)</h4>
               <p>
-                Advanced research in structural systems and computational approaches for engineering analysis, helping build the technical foundation for later infrastructure resilience and AI-focused work.
+                Thesis focused on seismic performance of exterior beam-column joint subassemblies reinforced with steel fibers.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-card tilt" data-reveal>
+            <div class="timeline-date">Mar 2010 – Feb 2016</div>
+            <div class="timeline-body">
+              <h3>B.S. in Architectural Engineering</h3>
+              <h4>Hanyang University (ERICA)</h4>
+              <p>
+                Undergraduate training in architectural and structural engineering with strong foundations in design, analysis, and infrastructure systems.
               </p>
             </div>
           </article>
@@ -534,29 +619,39 @@
         <div class="section-heading" data-reveal>
           <h2>Selected publications and active scholarship.</h2>
           <p>
-            The publication section now includes representative journal articles, conference work, and ongoing research directions directly aligned with the uploaded CV.
+            Representative peer-reviewed work spanning outage forecasting, climate hazard modeling, and infrastructure analytics.
           </p>
         </div>
+
         <div class="publication-list">
           <article class="publication tilt" data-reveal>
             <span class="type">Journal Article · 2025</span>
             <h3>A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models.</h3>
             <p>Lee, J., Zhang, Z., &amp; Paal, S.G. · <em>Computational Urban Science</em></p>
           </article>
+
           <article class="publication tilt" data-reveal>
             <span class="type">Journal Article · 2025</span>
             <h3>A near-real-time model for predicting electricity disruptions in Texas during winter storms.</h3>
             <p>Lee, J., Lee, S.M., Chinthavali, S., &amp; Paal, S.G. · <em>IEEE Access</em></p>
           </article>
+
           <article class="publication tilt" data-reveal>
-            <span class="type">Journal Article · 2024</span>
-            <h3>Shear strength of steel fiber-reinforced concrete exterior beam-column joints with various anchorage details under cyclic loading.</h3>
-            <p>Son, D.H., Bae, B.I., Lee, J., &amp; Choi, C.S. · <em>Structures</em></p>
-          </article>
-          <article class="publication tilt" data-reveal>
-            <span class="type">Conference · 2024</span>
+            <span class="type">Conference Paper · 2024</span>
             <h3>A generalized outage prediction model for various types of extreme climate events in Texas.</h3>
             <p>Lee, J., Lee, S.M., Paal, S.G., &amp; Chinthavali, S. · <em>IEEE BigData 2024</em></p>
+          </article>
+
+          <article class="publication tilt" data-reveal>
+            <span class="type">Conference Paper · 2024</span>
+            <h3>Knowledge transfer predictive models for power outage caused by various types of extreme weather events.</h3>
+            <p>Lee, J., &amp; Paal, S.G. · <em>IEEE BigData 2024</em></p>
+          </article>
+
+          <article class="publication tilt" data-reveal>
+            <span class="type">Accepted Oral · 2026</span>
+            <h3>Automated Structural Assessment and Tilt Measurement of Coastal Utility Poles: Leveraging Human-Refined Grounded SAM 3 and LiDAR Integration.</h3>
+            <p>Lee, J., &amp; Beck, A. · <em>ASCE EMI Conference</em></p>
           </article>
         </div>
       </div>
@@ -567,21 +662,30 @@
         <div class="spotlight tilt" data-reveal>
           <h3>From power outages to coastal utility poles, the work is unified by decision-ready intelligence.</h3>
           <p>
-            Current and emerging projects include automated structural assessment and tilt measurement of coastal utility poles using Grounded SAM 3 and LiDAR integration, community resilience analysis using 311 reports and big data analytics, and infrastructure quality estimation in coastal regions through multi-source data fusion.
+            Current and emerging projects include automated structural assessment and tilt measurement of coastal utility poles using Grounded SAM and LiDAR integration, integrated spatiotemporal assessment of infrastructure resilience and community vulnerability in Houston, and climate-informed outage forecasting using multi-source data.
           </p>
         </div>
+
         <div class="grid-3" style="margin-top:22px;">
           <div class="panel tilt" data-reveal>
             <h3>Power outage modeling</h3>
-            <p>Generalized and near-real-time prediction of electricity disruptions during winter storms and other hazardous weather events using meteorological, geographical, and socio-demographic inputs.</p>
+            <p>
+              Generalized and near-real-time prediction of electricity disruptions during winter storms and other hazardous climate events using meteorological, geographical, and socio-demographic inputs.
+            </p>
           </div>
+
           <div class="panel tilt" data-reveal>
             <h3>Machine vision &amp; LiDAR</h3>
-            <p>Automated assessment of utility pole deterioration and tilt angle estimation using computer vision, point cloud processing, and field-informed validation workflows.</p>
+            <p>
+              Automated assessment of utility pole deterioration and tilt angle estimation using computer vision, point cloud processing, semantic segmentation, and field-informed validation workflows.
+            </p>
           </div>
+
           <div class="panel tilt" data-reveal>
             <h3>Community resilience</h3>
-            <p>Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability through urban service requests, environmental context, and statistical modeling.</p>
+            <p>
+              Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability through urban service requests, geospatial context, and interpretable data analytics.
+            </p>
           </div>
         </div>
       </div>
@@ -592,19 +696,21 @@
         <div class="section-heading" data-reveal>
           <h2>Teaching, mentoring, and academic service.</h2>
           <p>
-            The original page compressed this area heavily. This redesign reflects the breadth of guest lecturing, teaching assistantship, reviewer service, and student mentorship present in the CV.
+            Teaching and mentorship from the CV are reorganized here for clarity while preserving the substance of the original record.
           </p>
         </div>
+
         <div class="grid-2">
           <div class="panel tilt" data-reveal>
             <h3>Teaching</h3>
             <ul>
-              <li>Guest Lecturer, ENGR 2301: Engineering Mechanics I (Statics), University of Houston, Spring 2026 and Fall 2025</li>
-              <li>Guest Lecturer, CIVE 3337: Structural Analysis, University of Houston, Fall 2025</li>
-              <li>Teaching Assistant, CVEN 363: Engineering Mechanics (Dynamics), Texas A&amp;M University, Spring 2023 – Spring 2024</li>
+              <li>Guest Lecturer, ENGR 2301: Engineering Mechanics I (Statics), University of Houston</li>
+              <li>Guest Lecturer, CIVE 3337: Structural Analysis, University of Houston</li>
+              <li>Teaching Assistant, CVEN 363: Engineering Mechanics (Dynamics), Texas A&amp;M University</li>
               <li>Teaching Assistant, CVEN 345: Theory of Structures, Texas A&amp;M University</li>
             </ul>
           </div>
+
           <div class="panel tilt" data-reveal>
             <h3>Mentorship &amp; service</h3>
             <ul>
@@ -623,11 +729,17 @@
         <div class="section-heading" data-reveal>
           <h2>Technical skill stack.</h2>
           <p>
-            Skills are reorganized as a modern tag system so visitors can scan capabilities quickly without losing the specificity listed in the CV.
+            A compact scan-friendly representation of the technical capabilities listed in the uploaded CV.
           </p>
         </div>
+
         <div class="panel tilt" data-reveal>
           <div class="chips">
+            <span class="chip">CloudCompare</span>
+            <span class="chip">Grounded SAM</span>
+            <span class="chip">Semantic Segmentation</span>
+            <span class="chip">Point Cloud Processing</span>
+            <span class="chip">LiDAR Data Analysis</span>
             <span class="chip">Python</span>
             <span class="chip">scikit-learn</span>
             <span class="chip">Pandas</span>
@@ -635,24 +747,24 @@
             <span class="chip">GeoPandas</span>
             <span class="chip">TensorFlow</span>
             <span class="chip">PyTorch</span>
+            <span class="chip">HPC</span>
+            <span class="chip">MATLAB</span>
+            <span class="chip">R</span>
             <span class="chip">XGBoost</span>
-            <span class="chip">LightGBM</span>
             <span class="chip">CatBoost</span>
-            <span class="chip">SHAP</span>
             <span class="chip">Transfer Learning</span>
+            <span class="chip">CNN</span>
+            <span class="chip">RNN</span>
             <span class="chip">Bayesian Optimization</span>
-            <span class="chip">Grounded SAM</span>
-            <span class="chip">Point Cloud Processing</span>
-            <span class="chip">LiDAR Data Analysis</span>
-            <span class="chip">QGIS</span>
-            <span class="chip">ArcGIS</span>
+            <span class="chip">SHAP</span>
             <span class="chip">SAP2000</span>
             <span class="chip">ABAQUS</span>
             <span class="chip">AutoCAD</span>
             <span class="chip">Revit</span>
-            <span class="chip">MATLAB</span>
-            <span class="chip">R</span>
+            <span class="chip">QGIS</span>
+            <span class="chip">ArcGIS</span>
             <span class="chip">LaTeX</span>
+            <span class="chip">Adobe Photoshop</span>
           </div>
         </div>
       </div>
@@ -688,14 +800,13 @@
         orb.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
       });
 
-      tilts.forEach((el, i) => {
+      tilts.forEach((el) => {
         const rect = el.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const rx = (e.clientY - cy) / Math.max(28, rect.height) * -10;
         const ry = (e.clientX - cx) / Math.max(28, rect.width) * 12;
-        const extra = el.classList.contains('metric') ? 6 : 0;
-        el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-${extra}px)`;
+        el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg)`;
       });
     });
 
