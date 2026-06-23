@@ -3,838 +3,896 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jangjae Lee | Infrastructure Resilience & Machine Learning</title>
-  <meta name="description" content="Portfolio of Dr. Jangjae Lee, Postdoctoral Research Fellow in Infrastructure Resilience & Machine Learning." />
+  <title>Jangjae Lee — Infrastructure Resilience & Machine Learning</title>
+  <meta name="description" content="Postdoctoral Research Fellow at the University of Houston. Power grid resilience, machine learning, LiDAR, and coastal infrastructure." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    /* ─── TOKENS ─────────────────────────────── */
     :root {
-      --bg: #020406;
-      --bg-soft: #0a0f16;
-      --panel: rgba(255,255,255,0.06);
-      --panel-strong: rgba(255,255,255,0.1);
-      --line: rgba(255,255,255,0.12);
-      --text: #f5f7fb;
-      --muted: #a7b0be;
-      --soft: #d7def0;
-      --accent: #7dd3fc;
-      --accent-2: #a78bfa;
-      --accent-3: #34d399;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 18px;
-      --max: 1240px;
+      --ink:       #0e1117;
+      --ink-2:     #2b3040;
+      --ink-3:     #5a6278;
+      --rule:      #dde1ec;
+      --bg:        #f6f7fb;
+      --bg-card:   #ffffff;
+      --sky:       #1a56e8;   /* signature accent — electric blueprint blue */
+      --sky-muted: #e6edfd;
+      --teal:      #0a8c72;
+      --paper:     #fffdf8;
+      --mono:      'DM Mono', monospace;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* ─── RESET ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Inter', sans-serif;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(125,211,252,0.16), transparent 26%),
-        radial-gradient(circle at 80% 10%, rgba(167,139,250,0.16), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(52,211,153,0.12), transparent 22%),
-        linear-gradient(180deg, #05070b 0%, #020406 46%, #040810 100%);
-      color: var(--text);
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
       overflow-x: hidden;
-      min-height: 100vh;
     }
-
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { display: block; max-width: 100%; }
 
-    .noise {
-      position: fixed; inset: 0; pointer-events: none; opacity: 0.045; z-index: 2;
-      background-image: radial-gradient(#fff 0.6px, transparent 0.6px);
-      background-size: 12px 12px;
-      mix-blend-mode: soft-light;
-    }
+    /* ─── LAYOUT HELPERS ─────────────────────── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 88px 0; }
+    .section + .section { border-top: 1px solid var(--rule); }
 
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(32px);
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.55;
-      transform: translate3d(0,0,0);
+    /* ─── NAV ────────────────────────────────── */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(246,247,251,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
     }
-    .orb.one {
-      width: 32vw; height: 32vw; left: -8vw; top: 8vh;
-      background: radial-gradient(circle, rgba(125,211,252,.55), rgba(125,211,252,.08) 55%, transparent 72%);
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 28px;
+      height: 58px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
     }
-    .orb.two {
-      width: 28vw; height: 28vw; right: -8vw; top: 24vh;
-      background: radial-gradient(circle, rgba(167,139,250,.48), rgba(167,139,250,.08) 55%, transparent 72%);
+    .nav-brand {
+      font-family: var(--mono); font-size: .82rem; letter-spacing: .06em;
+      color: var(--ink-3); font-weight: 500;
     }
-    .orb.three {
-      width: 24vw; height: 24vw; left: 36vw; bottom: 10vh;
-      background: radial-gradient(circle, rgba(52,211,153,.32), rgba(52,211,153,.06) 58%, transparent 76%);
-    }
-
-    .site-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(2,4,6,0.38);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    }
-    .brand {
-      display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: -0.03em;
-    }
-    .brand-mark {
-      width: 14px; height: 14px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 24px rgba(125,211,252,0.55);
-    }
+    .nav-brand strong { color: var(--ink); }
     .nav-links {
-      display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: 0.95rem;
+      display: flex; gap: 28px; list-style: none;
+      font-size: .88rem; color: var(--ink-3);
     }
-    .nav-links a:hover { color: var(--text); }
-    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .nav-links a:hover { color: var(--sky); }
+    .nav-cv {
+      font-family: var(--mono); font-size: .78rem; letter-spacing: .08em;
+      padding: 7px 16px; border: 1.5px solid var(--sky); color: var(--sky);
+      border-radius: 4px; transition: .2s;
+    }
+    .nav-cv:hover { background: var(--sky); color: #fff; }
 
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 18px; border-radius: 999px; font-weight: 600; transition: .35s ease;
-      border: 1px solid var(--line);
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      color: #021018;
-      background: linear-gradient(135deg, #dff5ff, #95e6ff 55%, #9ea6ff);
-      border-color: rgba(255,255,255,.3);
-      box-shadow: 0 12px 40px rgba(125,211,252,.18);
-    }
-    .btn-ghost {
-      background: rgba(255,255,255,0.04);
-      color: var(--soft);
-      backdrop-filter: blur(18px);
-    }
-
-    main { position: relative; z-index: 3; }
-    .section { padding: 120px 24px; }
-    .wrap { max-width: var(--max); margin: 0 auto; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--line); border-radius: 999px;
-      padding: 9px 14px; color: var(--soft); background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(14px); font-size: .88rem; margin-bottom: 22px;
-    }
-    .eyebrow::before {
-      content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 18px rgba(125,211,252,.8);
-    }
-
+    /* ─── HERO ───────────────────────────────── */
     .hero {
-      min-height: 100vh; display: flex; align-items: center; padding-top: 90px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 96px 0 80px;
     }
     .hero-grid {
-      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+    }
+
+    /* Blueprint grid background — the signature element */
+    .hero-visual {
+      position: relative;
+      height: 400px;
+    }
+    .blueprint {
+      width: 100%; height: 100%;
+      border-radius: 6px;
+      background-color: #0d1b4b;
+      overflow: hidden;
+      position: relative;
+    }
+    .blueprint svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+    .bp-label {
+      position: absolute; top: 20px; left: 20px;
+      font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,0.45);
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .bp-badge {
+      position: absolute; bottom: 20px; right: 20px;
+      background: rgba(26,86,232,0.18);
+      border: 1px solid rgba(26,86,232,0.5);
+      padding: 10px 16px; border-radius: 4px;
+      font-family: var(--mono); font-size: .72rem;
+      color: #7eb6ff; letter-spacing: .06em;
+      text-align: right; line-height: 1.8;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: .78rem; color: var(--sky);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px;
     }
     .hero h1 {
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: .92; letter-spacing: -0.06em; margin-bottom: 20px;
-      max-width: 10ch;
+      font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4.4rem);
+      line-height: 1.08; letter-spacing: -.01em; margin-bottom: 20px;
+      color: var(--ink);
     }
-    .hero .lead {
-      font-size: clamp(1.05rem, 1.6vw, 1.28rem);
-      color: var(--soft); max-width: 64ch; line-height: 1.8; margin-bottom: 26px;
+    .hero h1 em { font-style: italic; color: var(--sky); }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--ink-3); max-width: 54ch;
+      line-height: 1.8; margin-bottom: 32px;
     }
-    .hero-copy p + p { margin-top: 14px; }
-    .hero-metrics {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px;
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
     }
-    .metric {
-      padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid var(--line);
-      box-shadow: var(--shadow); backdrop-filter: blur(18px);
-      transform-style: preserve-3d;
-    }
-    .metric strong { display: block; font-size: 1.9rem; letter-spacing: -0.05em; }
-    .metric span { color: var(--muted); font-size: .92rem; }
-
-    .hero-stage {
-      perspective: 1400px;
-      min-height: 700px;
-      position: relative;
-    }
-    .glass-card {
-      position: absolute; inset: auto;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(20px);
-      overflow: hidden;
-      transform-style: preserve-3d;
-    }
-    .card-main {
-      width: min(540px, 92vw); height: 590px; right: 0; top: 10px;
-      padding: 22px;
-      transform: rotateY(-18deg) rotateX(8deg);
-    }
-    .card-small {
-      width: 230px; height: 160px; left: 10px; bottom: 55px; padding: 18px;
-      transform: rotateY(20deg) rotateX(-3deg) translateZ(40px);
-    }
-    .card-floating {
-      width: 250px; height: 200px; right: 20px; bottom: -16px; padding: 18px;
-      transform: rotateY(-14deg) rotateX(6deg) translateZ(50px);
-    }
-    .screen {
-      height: 100%; border-radius: 24px; padding: 18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
-        radial-gradient(circle at 20% 20%, rgba(125,211,252,0.25), transparent 28%),
-        radial-gradient(circle at 85% 10%, rgba(167,139,250,0.18), transparent 24%),
-        #09111a;
-      border: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .screen-top { display: flex; justify-content: space-between; align-items: center; }
-    .dots { display: flex; gap: 8px; }
-    .dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.3); }
-    .mini-label { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .18em; }
-
-    .profile-hero {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 18px;
-      min-height: 100%;
-      align-items: stretch;
-    }
-    .profile-photo-wrap {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(125,211,252,0.28), transparent 30%),
-        radial-gradient(circle at 80% 10%, rgba(167,139,250,0.24), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 420px;
-    }
-    .profile-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      transform: scale(1.02);
-    }
-    .profile-overlay {
-      position: absolute;
-      inset: auto 14px 14px 14px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(3,9,18,0.48);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-    }
-    .profile-overlay h3 {
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-      letter-spacing: -0.03em;
-    }
-    .profile-overlay p {
-      color: var(--soft);
-      font-size: .92rem;
-      line-height: 1.6;
-    }
-
-    .headline-panel {
-      padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-    }
-    .headline-panel h3 { font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 10px; }
-    .headline-panel p { color: var(--soft); line-height: 1.7; }
-    .bars { display: grid; gap: 10px; margin-top: auto; }
-    .bar {
-      height: 12px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .bar span {
-      display: block; height: 100%; border-radius: inherit;
-      background: linear-gradient(90deg, rgba(125,211,252,.95), rgba(167,139,250,.82));
-    }
-    .tilt {
-      transition: transform .25s ease, box-shadow .25s ease;
-      will-change: transform;
-    }
-
-    .section-heading {
-      margin-bottom: 28px; display: flex; align-items: end; justify-content: space-between; gap: 20px;
-    }
-    .section-heading h2 {
-      font-size: clamp(2rem, 4vw, 4rem); line-height: .95; letter-spacing: -0.06em;
-      max-width: 10ch;
-    }
-    .section-heading p { max-width: 48ch; color: var(--muted); line-height: 1.8; }
-
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-    .panel h3 { font-size: 1.35rem; letter-spacing: -0.04em; margin-bottom: 10px; }
-    .panel p, .panel li { color: var(--soft); line-height: 1.8; }
-    .panel ul { list-style: none; display: grid; gap: 10px; }
-    .panel li::before { content: "• "; color: var(--accent); }
-
-    .timeline { display: grid; gap: 18px; }
-    .timeline-card {
-      display: grid; grid-template-columns: 160px 1fr; gap: 24px;
-      align-items: start;
-      padding: 24px; border-radius: 24px;
-      background: rgba(255,255,255,0.045); border: 1px solid var(--line);
-      box-shadow: var(--shadow); backdrop-filter: blur(18px);
-    }
-    .timeline-date {
-      color: var(--accent); font-size: 0.95rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .12em;
-    }
-    .timeline-body h3 {
-      font-size: 1.35rem; letter-spacing: -0.04em; margin-bottom: 8px;
-    }
-    .timeline-body h4 {
-      color: var(--muted); font-size: 1rem; font-weight: 500; margin-bottom: 10px;
-    }
-
-    .publication-list { display: grid; gap: 18px; }
-    .publication {
-      padding: 24px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-    .publication .type {
-      display: inline-flex; padding: 8px 12px; border-radius: 999px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--line);
-      color: var(--soft); font-size: .8rem; margin-bottom: 14px;
-    }
-    .publication h3 {
-      font-size: 1.28rem; line-height: 1.45; letter-spacing: -0.03em; margin-bottom: 10px;
-    }
-    .publication p { color: var(--muted); line-height: 1.8; }
-
-    .spotlight {
-      padding: 34px;
-      border-radius: 30px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03)),
-        radial-gradient(circle at 10% 10%, rgba(125,211,252,.18), transparent 26%),
-        radial-gradient(circle at 90% 0%, rgba(167,139,250,.14), transparent 22%);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-    .spotlight h3 {
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1.05; letter-spacing: -0.05em; margin-bottom: 14px; max-width: 14ch;
-    }
-    .spotlight p { color: var(--soft); max-width: 75ch; line-height: 1.9; }
-
-    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
     .chip {
-      padding: 11px 16px; border-radius: 999px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--line);
-      color: var(--soft); font-size: .95rem;
-      backdrop-filter: blur(14px);
+      font-family: var(--mono); font-size: .73rem; letter-spacing: .06em;
+      padding: 5px 12px; border-radius: 3px;
+      background: var(--sky-muted); color: var(--sky);
+      border: 1px solid rgba(26,86,232,.18);
+    }
+    .chip.green {
+      background: #e6f6f2; color: var(--teal);
+      border-color: rgba(10,140,114,.18);
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; font-size: .92rem; font-weight: 500;
+      border-radius: 4px; transition: .2s;
+    }
+    .btn-solid {
+      background: var(--sky); color: #fff;
+    }
+    .btn-solid:hover { background: #1243c0; }
+    .btn-outline {
+      border: 1.5px solid var(--rule); color: var(--ink-2);
+    }
+    .btn-outline:hover { border-color: var(--sky); color: var(--sky); }
+
+    /* ─── SECTION LABEL / HEADING ────────────── */
+    .sec-label {
+      font-family: var(--mono); font-size: .72rem; color: var(--ink-3);
+      letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .sec-heading {
+      font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .sec-sub { color: var(--ink-3); max-width: 56ch; line-height: 1.7; margin-bottom: 40px; }
+
+    /* ─── TWO-COL WITH SIDEBAR ───────────────── */
+    .main-sidebar {
+      display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: start;
     }
 
-    footer {
-      padding: 36px 24px 80px;
-      color: var(--muted);
-      position: relative; z-index: 3;
+    /* ─── TIMELINE ───────────────────────────── */
+    .timeline { display: grid; gap: 0; }
+    .tl-item {
+      display: grid; grid-template-columns: 140px 1fr; gap: 24px;
+      padding: 28px 0; border-bottom: 1px solid var(--rule);
     }
-    .footer-panel {
-      max-width: var(--max); margin: 0 auto;
-      padding: 28px; border-radius: 28px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(18px);
-      display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    .tl-item:first-child { border-top: 1px solid var(--rule); }
+    .tl-date {
+      font-family: var(--mono); font-size: .72rem; color: var(--ink-3);
+      letter-spacing: .06em; padding-top: 4px;
+    }
+    .tl-body h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+    .tl-body h4 { font-size: .9rem; color: var(--ink-3); font-weight: 400; margin-bottom: 8px; }
+    .tl-body p  { font-size: .92rem; color: var(--ink-3); line-height: 1.7; }
+    .tl-body p em { color: var(--ink-2); font-style: normal; font-weight: 500; }
+
+    /* ─── SIDEBAR CARDS ──────────────────────── */
+    .aside-card {
+      background: var(--bg-card); border: 1px solid var(--rule);
+      border-radius: 6px; padding: 22px; margin-bottom: 16px;
+    }
+    .aside-card h4 {
+      font-family: var(--mono); font-size: .72rem; color: var(--ink-3);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .aside-list { list-style: none; display: grid; gap: 10px; }
+    .aside-list li {
+      font-size: .88rem; color: var(--ink-2); line-height: 1.5;
+      padding-left: 14px; position: relative;
+    }
+    .aside-list li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--sky); font-size: .8rem;
     }
 
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(36px) scale(0.98);
-      transition: opacity .8s ease, transform .8s ease;
+    /* ─── PUBLICATIONS ───────────────────────── */
+    .pub-list { display: grid; gap: 0; }
+    .pub-item {
+      display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+      padding: 26px 0; border-bottom: 1px solid var(--rule); align-items: start;
     }
-    [data-reveal].revealed {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .pub-item:first-child { border-top: 1px solid var(--rule); }
+    .pub-index {
+      font-family: var(--mono); font-size: .72rem; color: var(--rule);
+      padding-top: 4px; letter-spacing: .06em; font-weight: 500;
+      transition: color .2s;
+    }
+    .pub-item:hover .pub-index { color: var(--sky); }
+    .pub-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: .68rem; color: var(--ink-3);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .pub-tag::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--sky);
+    }
+    .pub-tag.conf::before { background: var(--teal); }
+    .pub-tag.prep::before { background: #bbb; }
+    .pub-item h3 {
+      font-size: .97rem; font-weight: 500; line-height: 1.55;
+      margin-bottom: 6px; color: var(--ink);
+    }
+    .pub-item p { font-size: .85rem; color: var(--ink-3); line-height: 1.5; }
+    .pub-item a { color: var(--sky); text-decoration: underline; }
+
+    /* ─── SKILLS GRID ────────────────────────── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .skill-block {
+      background: var(--bg-card); border: 1px solid var(--rule);
+      border-radius: 6px; padding: 20px;
+    }
+    .skill-block h4 {
+      font-family: var(--mono); font-size: .72rem; color: var(--sky);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .s-tag {
+      font-size: .78rem; color: var(--ink-3); background: var(--bg);
+      border: 1px solid var(--rule); border-radius: 3px;
+      padding: 4px 9px;
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .hero-stage { min-height: 700px; }
-      .card-main { left: 50%; transform: translateX(-50%) rotateY(-8deg) rotateX(5deg); }
-      .card-small { left: 0; bottom: 35px; }
-      .card-floating { right: 0; }
-      .section-heading { flex-direction: column; align-items: flex-start; }
+    /* ─── TEACHING ───────────────────────────── */
+    .teach-row {
+      display: grid; grid-template-columns: 160px 1fr; gap: 24px;
+      padding: 22px 0; border-bottom: 1px solid var(--rule); align-items: start;
+    }
+    .teach-row:first-child { border-top: 1px solid var(--rule); }
+    .teach-term { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); letter-spacing: .06em; padding-top: 3px; }
+    .teach-body h3 { font-size: .97rem; font-weight: 600; margin-bottom: 3px; }
+    .teach-body p { font-size: .88rem; color: var(--ink-3); line-height: 1.6; }
+
+    /* ─── CONTACT / FOOTER ───────────────────── */
+    .footer {
+      background: var(--ink); color: rgba(255,255,255,0.7);
+      padding: 64px 0 80px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    .footer h2 {
+      font-family: var(--serif); font-size: 2.2rem; color: #fff;
+      line-height: 1.15; margin-bottom: 14px;
+    }
+    .footer p { font-size: .95rem; line-height: 1.8; margin-bottom: 24px; }
+    .contact-list { list-style: none; display: grid; gap: 12px; }
+    .contact-list li { display: flex; align-items: center; gap: 12px; font-size: .9rem; }
+    .contact-list .cl-label {
+      font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,0.3);
+      letter-spacing: .1em; text-transform: uppercase; width: 60px; flex-shrink: 0;
+    }
+    .contact-list a { color: #7eb6ff; }
+    .contact-list a:hover { color: #fff; }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;
+    }
+    .footer-btn {
+      font-family: var(--mono); font-size: .75rem; letter-spacing: .08em;
+      padding: 9px 18px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.75);
+      transition: .2s;
+    }
+    .footer-btn:hover { border-color: #7eb6ff; color: #7eb6ff; }
+    .footer-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 48px 0 24px;
+    }
+    .footer-copy {
+      font-family: var(--mono); font-size: .7rem;
+      color: rgba(255,255,255,0.25); letter-spacing: .06em;
     }
 
-    @media (max-width: 760px) {
+    /* ─── REVEAL ANIMATION ───────────────────── */
+    [data-rev] {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    [data-rev].visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-grid, .main-sidebar, .footer-grid { grid-template-columns: 1fr; }
+      .hero-visual { height: 280px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
       .nav-links { display: none; }
-      .nav { padding: 14px 18px; }
-      .section { padding: 96px 18px; }
-      .hero-metrics { grid-template-columns: 1fr; }
-      .timeline-card { grid-template-columns: 1fr; gap: 12px; }
-      .hero-stage { min-height: 650px; }
-      .card-main {
-        width: 100%;
-        height: auto;
-        min-height: 560px;
-        right: auto;
-        left: 0;
-        transform: none;
-      }
-      .profile-hero {
-        grid-template-columns: 1fr;
-      }
-      .profile-photo-wrap {
-        min-height: 320px;
-      }
-      .card-small, .card-floating { display: none; }
-      .hero h1 { max-width: 100%; }
+      .tl-item, .teach-row { grid-template-columns: 1fr; gap: 6px; }
+      .pub-item { grid-template-columns: 36px 1fr; gap: 12px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-rev] { transition: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
+
 <body>
-  <div class="noise"></div>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
 
-  <header class="site-header">
-    <nav class="nav">
-      <a href="#top" class="brand">
-        <span class="brand-mark"></span>
-        <span>Jangjae Lee</span>
-      </a>
-      <div class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#publications">Publications</a>
-        <a href="#research">Research</a>
-        <a href="#teaching">Teaching</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <a class="btn btn-ghost" href="mailto:jlee277@central.uh.edu">Email</a>
-        <a class="btn btn-primary" href="CV_0326_Updated.pdf" target="_blank" rel="noreferrer">Download CV</a>
-      </div>
-    </nav>
-  </header>
+  <!-- ── NAV ───────────────────────────────── -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <span class="nav-brand"><strong>Jangjae Lee</strong> / UH · CEE</span>
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a class="nav-cv" href="Jangjae_Lee_CV_0623_2026.pdf" target="_blank" rel="noreferrer">↓ CV</a>
+    </div>
+  </nav>
 
-  <main id="top">
-    <section class="section hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy" data-reveal>
-          <div class="eyebrow">Infrastructure Resilience · Machine Learning · Coastal Systems</div>
-          <h1>Building resilient infrastructure intelligence.</h1>
-          <p class="lead">
-            Jangjae Lee is a Postdoctoral Research Fellow at the University of Houston working at the intersection of infrastructure resilience, climate risk, machine learning, and computer vision.
-          </p>
-          <p class="lead">
-            His work spans real-time power outage prediction, utility pole condition assessment with vision and LiDAR, and community resilience modeling using large-scale spatial and urban data.
-          </p>
-          <div style="display:flex; gap:14px; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="#publications">View Publications</a>
-            <a class="btn btn-ghost" href="#research">Explore Research</a>
-          </div>
-
-          <div class="hero-metrics">
-            <div class="metric tilt">
-              <strong>2025–</strong>
-              <span>Postdoctoral Research Fellow at UH</span>
-            </div>
-            <div class="metric tilt">
-              <strong>ML + CV</strong>
-              <span>Resilience, outage prediction, LiDAR fusion</span>
-            </div>
-            <div class="metric tilt">
-              <strong>Ph.D.</strong>
-              <span>Texas A&amp;M University, Civil Engineering</span>
-            </div>
-          </div>
+  <!-- ── HERO ──────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div data-rev>
+        <p class="hero-eyebrow">Postdoctoral Research Fellow · University of Houston</p>
+        <h1>Resilient<br>infrastructure<br><em>by data.</em></h1>
+        <p class="hero-desc">
+          Jangjae Lee builds machine learning and computer vision systems that help predict, inspect, and strengthen critical infrastructure against extreme climate events.
+        </p>
+        <div class="hero-chips">
+          <span class="chip">Power Grid Analytics</span>
+          <span class="chip">Outage Forecasting</span>
+          <span class="chip">Grounded SAM · LiDAR</span>
+          <span class="chip green">Ph.D. Texas A&amp;M</span>
+          <span class="chip green">ORNL Research Intern</span>
         </div>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#publications">Publications</a>
+          <a class="btn btn-outline" href="#research">Research areas</a>
+          <a class="btn btn-outline" href="mailto:jlee277@central.uh.edu">Get in touch</a>
+        </div>
+      </div>
 
-        <div class="hero-stage" data-reveal>
-          <div class="glass-card card-main tilt">
-            <div class="screen">
-              <div class="screen-top">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <div class="mini-label">Research profile</div>
-              </div>
+      <!-- Signature element: blueprint-style diagram -->
+      <div class="hero-visual" data-rev>
+        <div class="blueprint">
+          <svg viewBox="0 0 420 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- grid lines -->
+            <defs>
+              <pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0V20" stroke="rgba(255,255,255,0.04)" stroke-width=".5"/>
+              </pattern>
+              <pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse">
+                <rect width="100" height="100" fill="url(#minor)"/>
+                <path d="M100 0H0V100" stroke="rgba(255,255,255,0.1)" stroke-width=".8"/>
+              </pattern>
+            </defs>
+            <rect width="420" height="400" fill="url(#major)"/>
 
-              <div class="profile-hero">
-                <div class="profile-photo-wrap">
-                  <img
-                    src="assets/profile.jpg"
-                    alt="Portrait of Jangjae Lee"
-                    class="profile-photo"
-                    onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Jangjae+Lee&background=0b1220&color=f5f7fb&size=800';"
-                  />
-                  <div class="profile-overlay">
-                    <h3>Jangjae Lee</h3>
-                    <p>Postdoctoral Research Fellow · University of Houston</p>
-                  </div>
-                </div>
+            <!-- power network nodes -->
+            <circle cx="210" cy="200" r="28" stroke="#1a56e8" stroke-width="1.5" fill="rgba(26,86,232,0.12)"/>
+            <circle cx="210" cy="200" r="6"  fill="#1a56e8"/>
 
-                <div style="display:flex; flex-direction:column; gap:16px;">
-                  <div class="headline-panel">
-                    <h3>Data-driven models for resilient infrastructure systems.</h3>
-                    <p>
-                      Predicting climate-induced power outages, evaluating pole deterioration, and understanding community-level vulnerability through interpretable machine learning and spatial analytics.
-                    </p>
-                  </div>
+            <circle cx="100" cy="110" r="14" stroke="rgba(26,86,232,.5)" stroke-width="1.2" fill="rgba(26,86,232,.08)"/>
+            <circle cx="100" cy="110" r="4"  fill="rgba(26,86,232,.7)"/>
+            <circle cx="330" cy="100" r="14" stroke="rgba(26,86,232,.5)" stroke-width="1.2" fill="rgba(26,86,232,.08)"/>
+            <circle cx="330" cy="100" r="4"  fill="rgba(26,86,232,.7)"/>
+            <circle cx="80"  cy="300" r="14" stroke="rgba(26,86,232,.5)" stroke-width="1.2" fill="rgba(26,86,232,.08)"/>
+            <circle cx="80"  cy="300" r="4"  fill="rgba(26,86,232,.7)"/>
+            <circle cx="350" cy="310" r="14" stroke="rgba(26,86,232,.5)" stroke-width="1.2" fill="rgba(26,86,232,.08)"/>
+            <circle cx="350" cy="310" r="4"  fill="rgba(26,86,232,.7)"/>
+            <circle cx="195" cy="330" r="10" stroke="rgba(26,86,232,.4)" stroke-width="1" fill="rgba(26,86,232,.06)"/>
+            <circle cx="195" cy="330" r="3"  fill="rgba(26,86,232,.6)"/>
 
-                  <div class="headline-panel">
-                    <h3>Current focus</h3>
-                    <p>
-                      Coastal utility pole inspection with Grounded SAM and LiDAR, extreme weather outage forecasting, and big-data-informed resilience assessment.
-                    </p>
-                  </div>
+            <!-- edges -->
+            <line x1="210" y1="200" x2="100" y2="110" stroke="rgba(26,86,232,.45)" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <line x1="210" y1="200" x2="330" y2="100" stroke="rgba(26,86,232,.45)" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <line x1="210" y1="200" x2="80"  y2="300" stroke="rgba(26,86,232,.45)" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <line x1="210" y1="200" x2="350" y2="310" stroke="rgba(26,86,232,.45)" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <line x1="210" y1="200" x2="195" y2="330" stroke="rgba(26,86,232,.35)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="100" y1="110" x2="80"  y2="300" stroke="rgba(26,86,232,.2)"  stroke-width=".8" stroke-dasharray="4 5"/>
+            <line x1="330" y1="100" x2="350" y2="310" stroke="rgba(26,86,232,.2)"  stroke-width=".8" stroke-dasharray="4 5"/>
 
-                  <div class="bars">
-                    <div class="bar"><span style="width: 92%;"></span></div>
-                    <div class="bar"><span style="width: 84%;"></span></div>
-                    <div class="bar"><span style="width: 78%;"></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <!-- SHAP bar chart inset -->
+            <rect x="260" y="220" width="120" height="90" rx="4" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.08)" stroke-width=".8"/>
+            <text x="270" y="237" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="1">SHAP</text>
+            <rect x="270" y="245" width="70" height="6" rx="1" fill="rgba(26,86,232,.7)"/>
+            <rect x="270" y="256" width="50" height="6" rx="1" fill="rgba(26,86,232,.5)"/>
+            <rect x="270" y="267" width="85" height="6" rx="1" fill="rgba(26,86,232,.6)"/>
+            <rect x="270" y="278" width="38" height="6" rx="1" fill="rgba(26,86,232,.4)"/>
+            <rect x="270" y="289" width="55" height="6" rx="1" fill="rgba(26,86,232,.45)"/>
 
-          <div class="glass-card card-small tilt">
-            <div class="screen">
-              <div class="mini-label">Affiliation</div>
-              <div class="headline-panel" style="margin-top:auto;">
-                <h3 style="font-size:1.15rem;">University of Houston</h3>
-                <p style="font-size:.95rem;">Department of Civil and Environmental Engineering</p>
-              </div>
-            </div>
-          </div>
+            <!-- LiDAR point cloud dots inset -->
+            <rect x="24" y="130" width="100" height="80" rx="4" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.08)" stroke-width=".8"/>
+            <text x="33" y="146" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="1">LiDAR</text>
+            <g fill="rgba(10,200,160,0.7)" opacity=".85">
+              <circle cx="40" cy="165" r="1.5"/><circle cx="52" cy="158" r="1.5"/>
+              <circle cx="60" cy="168" r="1.5"/><circle cx="70" cy="160" r="1.5"/>
+              <circle cx="80" cy="172" r="1.5"/><circle cx="90" cy="162" r="1.5"/>
+              <circle cx="100" cy="170" r="1.5"/><circle cx="46" cy="178" r="1.5"/>
+              <circle cx="58" cy="182" r="1.5"/><circle cx="72" cy="175" r="1.5"/>
+              <circle cx="84" cy="183" r="1.5"/><circle cx="96" cy="177" r="1.5"/>
+              <circle cx="44" cy="190" r="1.5"/><circle cx="64" cy="195" r="1.5"/>
+              <circle cx="78" cy="190" r="1.5"/>
+            </g>
 
-          <div class="glass-card card-floating tilt">
-            <div class="screen">
-              <div class="mini-label">Methods</div>
-              <div class="chips" style="margin-top:auto;">
-                <span class="chip">ML</span>
-                <span class="chip">CV</span>
-                <span class="chip">LiDAR</span>
-                <span class="chip">GIS</span>
-              </div>
-            </div>
+            <!-- dimension ticks -->
+            <line x1="25" y1="368" x2="395" y2="368" stroke="rgba(255,255,255,.1)" stroke-width=".7"/>
+            <line x1="25" y1="364" x2="25" y2="372"  stroke="rgba(255,255,255,.1)" stroke-width=".7"/>
+            <line x1="395" y1="364" x2="395" y2="372" stroke="rgba(255,255,255,.1)" stroke-width=".7"/>
+          </svg>
+          <div class="bp-label">Infrastructure Resilience · ML Framework</div>
+          <div class="bp-badge">
+            9 States<br>
+            Power Grid Model<br>
+            Near-Real-Time
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="experience" class="section">
-      <div class="wrap">
-        <div class="section-heading" data-reveal>
-          <h2>Experience grounded in research, modeling, and impact.</h2>
-          <p>
-            This section reflects the uploaded CV with professional appointments, education, and research direction aligned to the most current version.
-          </p>
+  <!-- ── EXPERIENCE ─────────────────────────── -->
+  <section id="experience" class="section">
+    <div class="wrap">
+      <div class="main-sidebar">
+        <div>
+          <p class="sec-label" data-rev>Career</p>
+          <h2 class="sec-heading" data-rev>Experience &amp; Education</h2>
+          <p class="sec-sub" data-rev>Appointments, doctoral training, and international academic background.</p>
+
+          <div class="timeline">
+            <div class="tl-item" data-rev>
+              <div class="tl-date">Sep 2025 –<br>Present</div>
+              <div class="tl-body">
+                <h3>Postdoctoral Research Fellow</h3>
+                <h4>University of Houston · Dept. of Civil &amp; Environmental Engineering · PI: Dr. Abigail L. Beck</h4>
+                <p>Data-driven frameworks integrating 311 service requests, LiDAR, machine vision, meteorological, and census data for infrastructure resilience. Current work includes <em>coastal utility pole tilt assessment with Grounded SAM + LiDAR</em> and community vulnerability modeling across Houston neighborhoods.</p>
+              </div>
+            </div>
+
+            <div class="tl-item" data-rev>
+              <div class="tl-date">May – Aug<br>2024</div>
+              <div class="tl-body">
+                <h3>Research Intern</h3>
+                <h4>Oak Ridge National Laboratory · Geospatial Science &amp; Human Security Division · Mentor: Dr. Sangkeun M. Lee</h4>
+                <p>National-scale power grid resilience analysis within the Grid Resilience Research Group. Developed <em>interpretable ML models for critical energy infrastructure</em>; co-authored one journal article and one conference paper.</p>
+              </div>
+            </div>
+
+            <div class="tl-item" data-rev>
+              <div class="tl-date">Aug 2020 –<br>Aug 2025</div>
+              <div class="tl-body">
+                <h3>Ph.D., Civil Engineering</h3>
+                <h4>Texas A&amp;M University · Advisor: Dr. Stephanie G. Paal</h4>
+                <p>Dissertation: <em>ML-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions.</em> Excellence Fellowship (2020–24) · Dissertation Fellowship (2024–25). Architected large-scale outage prediction frameworks across nine U.S. states using XGBoost, LightGBM, CatBoost, and SHAP-based explainability.</p>
+              </div>
+            </div>
+
+            <div class="tl-item" data-rev>
+              <div class="tl-date">Mar 2016 –<br>Aug 2018</div>
+              <div class="tl-body">
+                <h3>M.S., Architectural Engineering</h3>
+                <h4>Hanyang University, Seoul · Advisor: Dr. Chang-Sik Choi</h4>
+                <p>Thesis: Seismic performance of RC exterior beam-column joints reinforced with steel fibers. NRF-funded research ($250,000); mentored junior researchers on experimental protocols. <em>HY-in Scholarship.</em></p>
+              </div>
+            </div>
+
+            <div class="tl-item" data-rev>
+              <div class="tl-date">Mar 2010 –<br>Feb 2016</div>
+              <div class="tl-body">
+                <h3>B.S., Architectural Engineering</h3>
+                <h4>Hanyang University ERICA, Ansan, South Korea</h4>
+                <p>Honor Scholarship (2015–16). Grand Prize, 10th KIBC Construction Technology Competition. Bronze Prize, Hanyang Capstone Design Competition. Capstone research on UHPCC shear bond strength with varying surface treatments.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="timeline">
-          <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">Sep 2025 – Present</div>
-            <div class="timeline-body">
-              <h3>Postdoctoral Research Fellow</h3>
-              <h4>University of Houston · Department of Civil and Environmental Engineering</h4>
-              <p>
-                Developing data-driven frameworks for infrastructure and community resilience assessment by integrating 311 service requests, LiDAR, machine vision, meteorological, and census data. Research includes infrastructure quality estimation, outage impact modeling, and field-based validation across multiple infrastructure systems.
-              </p>
-            </div>
-          </article>
+        <!-- SIDEBAR -->
+        <aside>
+          <div class="aside-card" data-rev>
+            <h4>Research Interests</h4>
+            <ul class="aside-list">
+              <li>ML for Critical Infrastructure Resilience</li>
+              <li>Power Grid Analytics &amp; Forecasting</li>
+              <li>Climate-Informed Multi-Hazard Risk</li>
+              <li>Explainable AI for Decision Support</li>
+              <li>Machine Vision for Infrastructure Inspection</li>
+              <li>LiDAR &amp; Geospatial Data Fusion</li>
+              <li>LLMs for Emergency Planning</li>
+              <li>Quantum Computing for Resilience Optimization</li>
+            </ul>
+          </div>
 
-          <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">May 2024 – Aug 2024</div>
-            <div class="timeline-body">
-              <h3>Research Intern</h3>
-              <h4>Oak Ridge National Laboratory (ORNL) · Geospatial Science and Human Security Division</h4>
-              <p>
-                Conducted national-scale power grid resilience analysis within the Grid Resilience Research group. Developed interpretable machine learning models for critical energy infrastructure systems and contributed to peer-reviewed publications on resilience enhancement.
-              </p>
-            </div>
-          </article>
+          <div class="aside-card" data-rev>
+            <h4>Honors &amp; Fellowships</h4>
+            <ul class="aside-list">
+              <li>Dissertation Fellowship — Texas A&amp;M (2024–25)</li>
+              <li>Excellence Fellowship — Texas A&amp;M (2020–24)</li>
+              <li>HY-in Scholarship — Hanyang U. Seoul (2016–18)</li>
+              <li>Grand Prize — KIBC Competition (2015)</li>
+              <li>Honor Scholarship — Hanyang ERICA (2015–16)</li>
+            </ul>
+          </div>
 
-          <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">Aug 2020 – Aug 2025</div>
-            <div class="timeline-body">
-              <h3>Ph.D. in Civil Engineering</h3>
-              <h4>Texas A&amp;M University</h4>
-              <p>
-                Dissertation: <em>ML-Based Decision Support: Modeling and Analysis of Power Outages in Texas Under Extreme Climate Conditions</em>. Advisor: Dr. Stephanie G. Paal.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">Mar 2016 – Aug 2018</div>
-            <div class="timeline-body">
-              <h3>M.S. in Architectural Engineering</h3>
-              <h4>Hanyang University (Seoul)</h4>
-              <p>
-                Thesis focused on seismic performance of exterior beam-column joint subassemblies reinforced with steel fibers.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-card tilt" data-reveal>
-            <div class="timeline-date">Mar 2010 – Feb 2016</div>
-            <div class="timeline-body">
-              <h3>B.S. in Architectural Engineering</h3>
-              <h4>Hanyang University (ERICA)</h4>
-              <p>
-                Undergraduate training in architectural and structural engineering with strong foundations in design, analysis, and infrastructure systems.
-              </p>
-            </div>
-          </article>
-        </div>
+          <div class="aside-card" data-rev>
+            <h4>Professional Memberships</h4>
+            <ul class="aside-list">
+              <li>NHERI Graduate Student Council</li>
+              <li>ASCE (2016–present)</li>
+              <li>ACI (2016–present)</li>
+              <li>AIK · KCI (2016–present)</li>
+            </ul>
+          </div>
+        </aside>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="publications" class="section">
-      <div class="wrap">
-        <div class="section-heading" data-reveal>
-          <h2>Selected publications and active scholarship.</h2>
-          <p>
-            Representative peer-reviewed work spanning outage forecasting, climate hazard modeling, and infrastructure analytics.
-          </p>
-        </div>
+  <!-- ── PUBLICATIONS ───────────────────────── -->
+  <section id="publications" class="section">
+    <div class="wrap">
+      <p class="sec-label" data-rev>Scholarship</p>
+      <h2 class="sec-heading" data-rev>Publications &amp; Presentations</h2>
+      <p class="sec-sub" data-rev>Peer-reviewed journal articles, conference proceedings, and accepted presentations.</p>
 
-        <div class="publication-list">
-          <article class="publication tilt" data-reveal>
-            <span class="type">Journal Article · 2025</span>
+      <div class="pub-list">
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">J1</div>
+          <div>
+            <span class="pub-tag">Journal · 2025</span>
             <h3>A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models.</h3>
-            <p>Lee, J., Zhang, Z., &amp; Paal, S.G. · <em>Computational Urban Science</em></p>
-          </article>
+            <p>Lee, J., Zhang, Z., &amp; Paal, S.G. · <em>Computational Urban Science</em>, Springer.
+               <a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
 
-          <article class="publication tilt" data-reveal>
-            <span class="type">Journal Article · 2025</span>
+        <div class="pub-item" data-rev>
+          <div class="pub-index">J2</div>
+          <div>
+            <span class="pub-tag">Journal · 2025</span>
             <h3>A near-real-time model for predicting electricity disruptions in Texas during winter storms.</h3>
-            <p>Lee, J., Lee, S.M., Chinthavali, S., &amp; Paal, S.G. · <em>IEEE Access</em></p>
-          </article>
+            <p>Lee, J., Lee, S.M., Chinthavali, S., &amp; Paal, S.G. · <em>IEEE Access</em>, 13, 139583–139603.
+               <a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
 
-          <article class="publication tilt" data-reveal>
-            <span class="type">Conference Paper · 2024</span>
+        <div class="pub-item" data-rev>
+          <div class="pub-index">J3</div>
+          <div>
+            <span class="pub-tag">Journal · 2024</span>
+            <h3>Shear strength of steel fiber-reinforced concrete (SFRC) exterior beam-column joints with various anchorage details under cyclic loading.</h3>
+            <p>Son, D.H., Bae, B.I., Lee, J., &amp; Choi, C.S. · <em>Structures</em>, 61, 105940.
+               <a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">J4</div>
+          <div>
+            <span class="pub-tag">Journal · 2018</span>
+            <h3>Seismic performance of RC exterior beam-column joints with steel fiber volume fractions.</h3>
+            <p>Lee, J., Bae, B.I., &amp; Choi, C.S. · <em>Journal of the Architectural Institute of Korea</em>, 34(4), 15–23.
+               <a href="https://doi.org/10.5659/JAIK_SC.2018.34.4.15" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">CP1</div>
+          <div>
+            <span class="pub-tag conf">Conference · 2025</span>
+            <h3>A Wide-and-Deep-Based Time Sequence Model for Predicting Power Outages Caused by Extreme Winter Storms.</h3>
+            <p>Liu, J., Zhang, Z., Cheng, Y., Lee, J., Paal, S., &amp; Li, D. · <em>ICA-Proc</em>, 7, 6.
+               <a href="https://doi.org/10.5194/ica-proc-7-6-2025" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">CP2</div>
+          <div>
+            <span class="pub-tag conf">Conference · 2024</span>
             <h3>A generalized outage prediction model for various types of extreme climate events in Texas.</h3>
-            <p>Lee, J., Lee, S.M., Paal, S.G., &amp; Chinthavali, S. · <em>IEEE BigData 2024</em></p>
-          </article>
+            <p>Lee, J., Lee, S.M., Paal, S.G., &amp; Chinthavali, S. · <em>IEEE BigData 2024</em>.
+               <a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
 
-          <article class="publication tilt" data-reveal>
-            <span class="type">Conference Paper · 2024</span>
+        <div class="pub-item" data-rev>
+          <div class="pub-index">CP3</div>
+          <div>
+            <span class="pub-tag conf">Conference · 2024</span>
             <h3>Knowledge transfer predictive models for power outage caused by various types of extreme weather events.</h3>
-            <p>Lee, J., &amp; Paal, S.G. · <em>IEEE BigData 2024</em></p>
-          </article>
+            <p>Lee, J., &amp; Paal, S.G. · <em>IEEE BigData 2024</em>.
+               <a href="https://doi.org/10.1109/BigData62323.2024.10825465" target="_blank" rel="noreferrer">DOI ↗</a></p>
+          </div>
+        </div>
 
-          <article class="publication tilt" data-reveal>
-            <span class="type">Accepted Oral · 2026</span>
+        <div class="pub-item" data-rev>
+          <div class="pub-index">O1</div>
+          <div>
+            <span class="pub-tag conf">Oral · Accepted 2026</span>
             <h3>Automated Structural Assessment and Tilt Measurement of Coastal Utility Poles: Leveraging Human-Refined Grounded SAM 3 and LiDAR Integration.</h3>
-            <p>Lee, J., &amp; Beck, A. · <em>ASCE EMI Conference</em></p>
-          </article>
+            <p>Lee, J., &amp; Beck, A.L. · <em>ASCE EMI Conference</em>, Boulder, CO.</p>
+          </div>
+        </div>
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">R1</div>
+          <div>
+            <span class="pub-tag prep">Under Review · 2025</span>
+            <h3>An integrated model for predicting power outages caused by various types of extreme weather events.</h3>
+            <p>Lee, J., Lee, S.M., Chinthavali, S., &amp; Paal, S.G.</p>
+          </div>
+        </div>
+
+        <div class="pub-item" data-rev>
+          <div class="pub-index">P1–P4</div>
+          <div>
+            <span class="pub-tag prep">In Preparation · 2026</span>
+            <h3>Four manuscripts in preparation on knowledge-based outage models, community resilience, coastal LiDAR infrastructure assessment, and SFRC shear capacity transfer learning.</h3>
+            <p>Lee, J. et al. — details available upon request.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH ───────────────────────────── -->
+  <section id="research" class="section" style="background:var(--paper);">
+    <div class="wrap">
+      <p class="sec-label" data-rev>Focus Areas</p>
+      <h2 class="sec-heading" data-rev>Research</h2>
+      <p class="sec-sub" data-rev>Three threads, one mission: decision-ready intelligence for vulnerable infrastructure.</p>
+
+      <div class="skills-grid" style="grid-template-columns: repeat(3,1fr); gap:20px;" data-rev>
+        <div class="skill-block" style="border-top:3px solid var(--sky);">
+          <h4>Power Outage Modeling</h4>
+          <p style="font-size:.9rem; color:var(--ink-3); line-height:1.7; margin-bottom:14px;">
+            Generalized and near-real-time prediction of electricity disruptions during winter storms and multi-hazard extreme events across nine U.S. states. Inputs include meteorological, geographical, and socio-demographic data with Bayesian-tuned ensemble models and SHAP explainability.
+          </p>
+          <div class="skill-tags">
+            <span class="s-tag">XGBoost</span><span class="s-tag">LightGBM</span><span class="s-tag">Transfer Learning</span><span class="s-tag">SHAP</span>
+          </div>
+        </div>
+
+        <div class="skill-block" style="border-top:3px solid var(--teal);">
+          <h4>Machine Vision &amp; LiDAR</h4>
+          <p style="font-size:.9rem; color:var(--ink-3); line-height:1.7; margin-bottom:14px;">
+            Automated assessment of coastal utility pole deterioration and tilt angle measurement using Grounded SAM 3, semantic segmentation, and LiDAR point cloud integration. Human-in-the-loop validation workflows for real-world deployment.
+          </p>
+          <div class="skill-tags">
+            <span class="s-tag">Grounded SAM</span><span class="s-tag">CloudCompare</span><span class="s-tag">Point Cloud</span><span class="s-tag">CNN</span>
+          </div>
+        </div>
+
+        <div class="skill-block" style="border-top:3px solid #e8a01a;">
+          <h4>Community Resilience</h4>
+          <p style="font-size:.9rem; color:var(--ink-3); line-height:1.7; margin-bottom:14px;">
+            Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability across Houston using 311 service requests, big data analytics, census data, and geospatial context to quantify neighborhood-level outage impact.
+          </p>
+          <div class="skill-tags">
+            <span class="s-tag">GeoPandas</span><span class="s-tag">QGIS</span><span class="s-tag">311 Data</span><span class="s-tag">Spatial Stats</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="research" class="section">
-      <div class="wrap">
-        <div class="spotlight tilt" data-reveal>
-          <h3>From power outages to coastal utility poles, the work is unified by decision-ready intelligence.</h3>
-          <p>
-            Current and emerging projects include automated structural assessment and tilt measurement of coastal utility poles using Grounded SAM and LiDAR integration, integrated spatiotemporal assessment of infrastructure resilience and community vulnerability in Houston, and climate-informed outage forecasting using multi-source data.
-          </p>
+  <!-- ── SKILLS ─────────────────────────────── -->
+  <section class="section">
+    <div class="wrap">
+      <p class="sec-label" data-rev>Technical Stack</p>
+      <h2 class="sec-heading" data-rev>Skills</h2>
+
+      <div class="skills-grid" data-rev>
+        <div class="skill-block">
+          <h4>Point Cloud &amp; Vision</h4>
+          <div class="skill-tags">
+            <span class="s-tag">CloudCompare</span>
+            <span class="s-tag">Grounded SAM</span>
+            <span class="s-tag">Semantic Segmentation</span>
+            <span class="s-tag">Point Cloud Processing</span>
+            <span class="s-tag">LiDAR Analysis</span>
+          </div>
         </div>
-
-        <div class="grid-3" style="margin-top:22px;">
-          <div class="panel tilt" data-reveal>
-            <h3>Power outage modeling</h3>
-            <p>
-              Generalized and near-real-time prediction of electricity disruptions during winter storms and other hazardous climate events using meteorological, geographical, and socio-demographic inputs.
-            </p>
+        <div class="skill-block">
+          <h4>ML &amp; Deep Learning</h4>
+          <div class="skill-tags">
+            <span class="s-tag">XGBoost</span>
+            <span class="s-tag">CatBoost</span>
+            <span class="s-tag">Transfer Learning</span>
+            <span class="s-tag">CNN · RNN</span>
+            <span class="s-tag">Bayesian Optimization</span>
+            <span class="s-tag">SHAP</span>
           </div>
-
-          <div class="panel tilt" data-reveal>
-            <h3>Machine vision &amp; LiDAR</h3>
-            <p>
-              Automated assessment of utility pole deterioration and tilt angle estimation using computer vision, point cloud processing, semantic segmentation, and field-informed validation workflows.
-            </p>
+        </div>
+        <div class="skill-block">
+          <h4>Programming</h4>
+          <div class="skill-tags">
+            <span class="s-tag">Python</span>
+            <span class="s-tag">scikit-learn</span>
+            <span class="s-tag">TensorFlow</span>
+            <span class="s-tag">PyTorch</span>
+            <span class="s-tag">Pandas · NumPy</span>
+            <span class="s-tag">GeoPandas</span>
+            <span class="s-tag">R · MATLAB</span>
+            <span class="s-tag">HPC</span>
           </div>
-
-          <div class="panel tilt" data-reveal>
-            <h3>Community resilience</h3>
-            <p>
-              Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability through urban service requests, geospatial context, and interpretable data analytics.
-            </p>
+        </div>
+        <div class="skill-block">
+          <h4>Geospatial</h4>
+          <div class="skill-tags">
+            <span class="s-tag">QGIS</span>
+            <span class="s-tag">ArcGIS</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Structural Engineering</h4>
+          <div class="skill-tags">
+            <span class="s-tag">SAP2000</span>
+            <span class="s-tag">ABAQUS</span>
+            <span class="s-tag">AutoCAD</span>
+            <span class="s-tag">Revit</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>General</h4>
+          <div class="skill-tags">
+            <span class="s-tag">LaTeX</span>
+            <span class="s-tag">Adobe Photoshop</span>
+            <span class="s-tag">Microsoft Office</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="teaching" class="section">
-      <div class="wrap">
-        <div class="section-heading" data-reveal>
-          <h2>Teaching, mentoring, and academic service.</h2>
-          <p>
-            Teaching and mentorship from the CV are reorganized here for clarity while preserving the substance of the original record.
-          </p>
+  <!-- ── TEACHING ───────────────────────────── -->
+  <section id="teaching" class="section" style="background:var(--paper);">
+    <div class="wrap">
+      <p class="sec-label" data-rev>Pedagogy &amp; Service</p>
+      <h2 class="sec-heading" data-rev>Teaching &amp; Mentorship</h2>
+      <p class="sec-sub" data-rev>Courses, mentored researchers, and manuscript review activity.</p>
+
+      <div class="teach-row" data-rev>
+        <div class="teach-term">Spring 2026</div>
+        <div class="teach-body">
+          <h3>Guest Lecturer — ENGR 2301 Statics &amp; CIVE 3337 Structural Analysis</h3>
+          <p>University of Houston. Delivered lectures on 3D rigid body equilibrium, space truss analysis, structural determinacy and stability for undergraduate students.</p>
+        </div>
+      </div>
+
+      <div class="teach-row" data-rev>
+        <div class="teach-term">Fall 2025</div>
+        <div class="teach-body">
+          <h3>Guest Lecturer — ENGR 2301 Engineering Mechanics I (Statics)</h3>
+          <p>University of Houston. Designed and delivered centroids and moment of inertia lecture for 40+ students, integrating physical demonstrations for engineering intuition.</p>
+        </div>
+      </div>
+
+      <div class="teach-row" data-rev>
+        <div class="teach-term">Sp 2023 –<br>Sp 2024</div>
+        <div class="teach-body">
+          <h3>Teaching Assistant — CVEN 363 Dynamics &amp; CVEN 345 Theory of Structures</h3>
+          <p>Texas A&amp;M University. Biweekly recitations for 60+ students; managed grading for 150+ students across three instructors; held weekly office hours and created supplemental materials.</p>
+        </div>
+      </div>
+
+      <div class="teach-row" data-rev>
+        <div class="teach-term">Mentorship</div>
+        <div class="teach-body">
+          <h3>Graduate &amp; Undergraduate Researchers</h3>
+          <p>Currently mentoring four graduate RAs at UH (Ogunleye, Ajenifuja, Barua, Samudio). Previously mentored Jacob Murphy (grad) and Robyn Andrew (undergrad) at TAMU, and two junior researchers at Hanyang University.</p>
+        </div>
+      </div>
+
+      <div class="teach-row" data-rev>
+        <div class="teach-term">Review</div>
+        <div class="teach-body">
+          <h3>Ad-hoc Journal Reviewer</h3>
+          <p>Reliability Engineering &amp; System Safety (Elsevier) · Natural Hazards Review (ASCE) · International Journal of Disaster Risk Reduction (Elsevier).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT / FOOTER ───────────────────── -->
+  <footer id="contact" class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div data-rev>
+          <h2>Let's connect.</h2>
+          <p>Open to collaborations in infrastructure resilience, machine learning for hazard modeling, and LiDAR-based inspection systems.</p>
+          <ul class="contact-list">
+            <li>
+              <span class="cl-label">Email</span>
+              <a href="mailto:jlee277@central.uh.edu">jlee277@central.uh.edu</a>
+            </li>
+            <li>
+              <span class="cl-label">Phone</span>
+              <span>+1 (979) 255-0299</span>
+            </li>
+            <li>
+              <span class="cl-label">Office</span>
+              <span>Dept. of Civil &amp; Environmental Engineering, University of Houston, TX 77204</span>
+            </li>
+          </ul>
+          <div class="footer-links">
+            <a class="footer-btn" href="https://www.linkedin.com/in/jangjlee10" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a class="footer-btn" href="https://github.com/Jerry03120" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a class="footer-btn" href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a>
+            <a class="footer-btn" href="Jangjae_Lee_CV_0623_2026.pdf" target="_blank" rel="noreferrer">Download CV ↗</a>
+          </div>
         </div>
 
-        <div class="grid-2">
-          <div class="panel tilt" data-reveal>
-            <h3>Teaching</h3>
-            <ul>
-              <li>Guest Lecturer, ENGR 2301: Engineering Mechanics I (Statics), University of Houston</li>
-              <li>Guest Lecturer, CIVE 3337: Structural Analysis, University of Houston</li>
-              <li>Teaching Assistant, CVEN 363: Engineering Mechanics (Dynamics), Texas A&amp;M University</li>
-              <li>Teaching Assistant, CVEN 345: Theory of Structures, Texas A&amp;M University</li>
+        <div data-rev>
+          <div style="border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:28px;">
+            <p style="font-family:var(--mono); font-size:.68rem; color:rgba(255,255,255,0.3); letter-spacing:.12em; text-transform:uppercase; margin-bottom:18px;">References</p>
+            <ul style="list-style:none; display:grid; gap:18px;">
+              <li style="font-size:.87rem; line-height:1.6;">
+                <strong style="color:rgba(255,255,255,0.75);">Stephanie G. Paal, Ph.D.</strong><br>
+                Associate Professor, Texas A&amp;M University<br>
+                <a href="mailto:spaal@civil.tamu.edu" style="color:#7eb6ff;">spaal@civil.tamu.edu</a>
+              </li>
+              <li style="font-size:.87rem; line-height:1.6;">
+                <strong style="color:rgba(255,255,255,0.75);">Abigail L. Beck, Ph.D.</strong><br>
+                Assistant Professor, University of Houston<br>
+                <a href="mailto:albeck2@uh.edu" style="color:#7eb6ff;">albeck2@uh.edu</a>
+              </li>
+              <li style="font-size:.87rem; line-height:1.6;">
+                <strong style="color:rgba(255,255,255,0.75);">Sangkeun M. Lee, Ph.D.</strong><br>
+                Senior Staff Data Scientist, ORNL<br>
+                <a href="mailto:lees4@ornl.gov" style="color:#7eb6ff;">lees4@ornl.gov</a>
+              </li>
             </ul>
           </div>
-
-          <div class="panel tilt" data-reveal>
-            <h3>Mentorship &amp; service</h3>
-            <ul>
-              <li>Mentoring graduate research assistants at the University of Houston.</li>
-              <li>Mentored graduate and undergraduate researchers at Texas A&amp;M University.</li>
-              <li>Journal reviewer for <em>Reliability Engineering &amp; System Safety</em>, <em>Natural Hazards Review</em>, and <em>International Journal of Disaster Risk Reduction</em>.</li>
-              <li>Member of NHERI Graduate Student Council, ASCE, ACI, AIK, and KCI.</li>
-            </ul>
-          </div>
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="section-heading" data-reveal>
-          <h2>Technical skill stack.</h2>
-          <p>
-            A compact scan-friendly representation of the technical capabilities listed in the uploaded CV.
-          </p>
-        </div>
-
-        <div class="panel tilt" data-reveal>
-          <div class="chips">
-            <span class="chip">CloudCompare</span>
-            <span class="chip">Grounded SAM</span>
-            <span class="chip">Semantic Segmentation</span>
-            <span class="chip">Point Cloud Processing</span>
-            <span class="chip">LiDAR Data Analysis</span>
-            <span class="chip">Python</span>
-            <span class="chip">scikit-learn</span>
-            <span class="chip">Pandas</span>
-            <span class="chip">NumPy</span>
-            <span class="chip">GeoPandas</span>
-            <span class="chip">TensorFlow</span>
-            <span class="chip">PyTorch</span>
-            <span class="chip">HPC</span>
-            <span class="chip">MATLAB</span>
-            <span class="chip">R</span>
-            <span class="chip">XGBoost</span>
-            <span class="chip">CatBoost</span>
-            <span class="chip">Transfer Learning</span>
-            <span class="chip">CNN</span>
-            <span class="chip">RNN</span>
-            <span class="chip">Bayesian Optimization</span>
-            <span class="chip">SHAP</span>
-            <span class="chip">SAP2000</span>
-            <span class="chip">ABAQUS</span>
-            <span class="chip">AutoCAD</span>
-            <span class="chip">Revit</span>
-            <span class="chip">QGIS</span>
-            <span class="chip">ArcGIS</span>
-            <span class="chip">LaTeX</span>
-            <span class="chip">Adobe Photoshop</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="contact">
-    <div class="footer-panel">
-      <div>
-        <strong style="display:block; color:var(--text); margin-bottom:8px;">Jangjae Lee</strong>
-        <div>Postdoctoral Research Fellow · University of Houston</div>
-        <div style="margin-top:8px;">jlee277@central.uh.edu · +1 (979) 255-0299</div>
-      </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/jangjlee10" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/Jerry03120" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn btn-primary" href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar</a>
-      </div>
+      <hr class="footer-divider">
+      <p class="footer-copy">© 2026 Jangjae Lee · University of Houston · Department of Civil and Environmental Engineering</p>
     </div>
   </footer>
 
   <script>
-    const orbs = document.querySelectorAll('.orb');
-    const tilts = document.querySelectorAll('.tilt');
-    const revealItems = document.querySelectorAll('[data-reveal]');
+    // Scroll reveal
+    const revEls = document.querySelectorAll('[data-rev]');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revEls.forEach(el => obs.observe(el));
 
-    window.addEventListener('mousemove', (e) => {
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
-
-      orbs.forEach((orb, i) => {
-        const depth = (i + 1) * 18;
-        orb.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
+    // Stagger children inside sections
+    document.querySelectorAll('.timeline, .pub-list, .skills-grid, .teach-row').forEach(parent => {
+      [...parent.children].forEach((child, i) => {
+        child.style.transitionDelay = `${i * 60}ms`;
       });
-
-      tilts.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const rx = (e.clientY - cy) / Math.max(28, rect.height) * -10;
-        const ry = (e.clientX - cx) / Math.max(28, rect.width) * 12;
-        el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-    });
-
-    window.addEventListener('mouseleave', () => {
-      tilts.forEach(el => {
-        if (el.classList.contains('card-main')) {
-          el.style.transform = 'rotateY(-18deg) rotateX(8deg)';
-        } else if (el.classList.contains('card-small')) {
-          el.style.transform = 'rotateY(20deg) rotateX(-3deg) translateZ(40px)';
-        } else if (el.classList.contains('card-floating')) {
-          el.style.transform = 'rotateY(-14deg) rotateX(6deg) translateZ(50px)';
-        } else {
-          el.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
-        }
-      });
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('revealed');
-      });
-    }, { threshold: 0.12 });
-
-    revealItems.forEach(item => observer.observe(item));
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      document.querySelector('.site-header').style.background = `rgba(2,4,6,${Math.min(0.72, 0.38 + scrollY / 1200)})`;
     });
   </script>
 </body>
