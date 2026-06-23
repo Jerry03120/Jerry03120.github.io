@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Jangjae Lee</title>
+<title>Jangjae Lee — Infrastructure Resilience & Machine Learning</title>
+<meta name="description" content="Postdoctoral Research Fellow at the University of Houston. Power grid resilience, machine learning, LiDAR, and coastal infrastructure."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -16,6 +17,7 @@
   --link:#1a6db5;
   --border:#e5e5e5;
   --bg:#fff;
+  --bg-subtle:#f9f9f9;
 }
 html{font-size:15px}
 body{
@@ -29,407 +31,233 @@ body{
 a{color:var(--link);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* ── TOP NAV ── */
+/* ── NAV ── */
 nav{
-  position:sticky;
-  top:0;
+  position:sticky;top:0;
   background:rgba(255,255,255,0.95);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--border);
-  padding:0 40px;
-  z-index:100;
+  padding:0 40px;z-index:100;
 }
 .nav-inner{
-  max-width:860px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
   height:48px;
 }
-.nav-name{
-  font-weight:500;
-  font-size:0.9rem;
-  color:var(--text);
+.nav-name{font-weight:500;font-size:0.9rem;color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.82rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover,.nav-links a.active{color:var(--link)}
+.nav-cv{
+  font-size:0.75rem;padding:5px 13px;
+  border:1px solid var(--border);border-radius:3px;
+  color:var(--muted);transition:.15s;white-space:nowrap;
 }
-.nav-links{
-  display:flex;
-  gap:28px;
-  list-style:none;
-}
-.nav-links a{
-  font-size:0.82rem;
-  color:var(--muted);
-  text-decoration:none;
-}
-.nav-links a:hover{color:var(--link)}
+.nav-cv:hover{border-color:#aaa;color:var(--text);text-decoration:none}
 
-/* ── MAIN LAYOUT ── */
-.wrap{
-  max-width:860px;
-  margin:0 auto;
-  padding:52px 40px 100px;
-}
+/* ── LAYOUT ── */
+.wrap{max-width:860px;margin:0 auto;padding:52px 40px 100px}
 
-/* ── PROFILE HEADER ── */
+/* ── AFFILIATION STRIP ── */
+.affil-strip{
+  border-bottom:1px solid var(--border);
+  background:var(--bg-subtle);
+  padding:14px 40px;
+}
+.affil-inner{
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.affil-label{
+  font-size:0.68rem;color:var(--light);
+  letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;flex-shrink:0;
+  padding-right:8px;border-right:1px solid var(--border);
+}
+.affil-logos{
+  display:flex;align-items:center;
+  gap:0;flex-wrap:wrap;flex:1;
+}
+.affil-item{
+  display:flex;align-items:center;gap:8px;
+  padding:4px 20px;
+  border-right:1px solid var(--border);
+}
+.affil-item:last-child{border-right:none}
+.affil-img{
+  height:26px;width:auto;max-width:72px;
+  object-fit:contain;
+  filter:grayscale(100%) opacity(.45);
+  transition:filter .25s;
+}
+.affil-item:hover .affil-img{filter:grayscale(0%) opacity(1)}
+.affil-name{font-size:0.72rem;color:var(--light);white-space:nowrap}
+.affil-item:hover .affil-name{color:var(--muted)}
+
+/* ── PROFILE ── */
 .profile{
-  display:grid;
-  grid-template-columns:1fr 148px;
-  gap:32px;
-  margin-bottom:52px;
-  align-items:start;
+  display:grid;grid-template-columns:1fr 148px;
+  gap:32px;margin-bottom:52px;align-items:start;
 }
 .profile-text h1{
-  font-size:1.6rem;
-  font-weight:500;
-  line-height:1.25;
-  margin-bottom:4px;
-  letter-spacing:-0.01em;
+  font-size:1.6rem;font-weight:500;line-height:1.25;
+  margin-bottom:4px;letter-spacing:-0.01em;
 }
-.profile-text .name-kr{
-  font-size:0.9rem;
-  color:var(--muted);
-  margin-bottom:14px;
-}
-.profile-position{
-  font-size:0.85rem;
-  color:var(--muted);
-  line-height:1.65;
-  margin-bottom:18px;
-}
-.profile-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-bottom:18px;
-}
+.name-kr{font-size:0.9rem;color:var(--muted);margin-bottom:14px}
+.profile-position{font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.profile-links{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px}
 .profile-links a{
-  font-size:0.78rem;
-  color:var(--link);
-  display:flex;
-  align-items:center;
-  gap:4px;
+  font-size:0.78rem;color:var(--link);
+  display:flex;align-items:center;gap:4px;
 }
-.profile-links svg{
-  width:13px;height:13px;
-  stroke:currentColor;stroke-width:1.7;fill:none;
-}
+.profile-links svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.7;fill:none}
 .profile-photo{
-  width:148px;
-  height:148px;
-  border-radius:4px;
-  object-fit:cover;
-  background:linear-gradient(135deg,#e8eef6 0%,#d0ddf0 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:0.7rem;
-  color:var(--light);
-  text-align:center;
-  flex-shrink:0;
+  width:148px;height:148px;border-radius:4px;
+  object-fit:cover;flex-shrink:0;
+  background:#e8eef6;display:block;
+}
+.profile-photo-placeholder{
+  width:148px;height:148px;border-radius:4px;
+  background:linear-gradient(135deg,#e8eef6,#d0ddf0);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;color:var(--light);text-align:center;
+  flex-shrink:0;border:1px solid var(--border);
 }
 
 /* ── BIO ── */
-.bio{
-  font-size:0.88rem;
-  color:var(--text);
-  line-height:1.8;
-  margin-bottom:10px;
-}
+.bio{font-size:0.88rem;color:var(--text);line-height:1.8;margin-bottom:10px}
 .bio strong{font-weight:500}
 
-/* ── INTEREST / TRAJ COLS ── */
-.meta-cols{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:28px;
-  margin-top:28px;
-}
+/* ── META COLS ── */
+.meta-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px}
 .meta-group h4{
-  font-size:0.72rem;
-  font-weight:500;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--light);
-  margin-bottom:10px;
+  font-size:0.72rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--light);margin-bottom:10px;
 }
-.meta-group ul{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-.meta-group ul li{
-  font-size:0.82rem;
-  color:var(--muted);
-}
-.meta-group ul li::before{
-  content:'— ';
-  color:var(--border);
-}
-.traj-item{
-  display:flex;
-  align-items:baseline;
-  gap:8px;
-  margin-bottom:6px;
-}
+.meta-group ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.meta-group ul li{font-size:0.82rem;color:var(--muted)}
+.meta-group ul li::before{content:'— ';color:var(--border)}
+.traj-item{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
 .traj-year{
-  font-size:0.72rem;
-  color:var(--light);
-  font-variant-numeric:tabular-nums;
-  min-width:68px;
-  flex-shrink:0;
+  font-size:0.72rem;color:var(--light);
+  font-variant-numeric:tabular-nums;min-width:68px;flex-shrink:0;
 }
-.traj-desc{
-  font-size:0.82rem;
-  color:var(--muted);
-}
+.traj-desc{font-size:0.82rem;color:var(--muted)}
 .traj-desc strong{color:var(--text);font-weight:500}
+.traj-logo{
+  height:14px;width:auto;max-width:48px;
+  object-fit:contain;vertical-align:middle;
+  filter:grayscale(100%) opacity(.5);
+  margin-right:4px;transition:filter .2s;
+}
+.traj-item:hover .traj-logo{filter:grayscale(0%) opacity(.9)}
 
 /* ── SECTION ── */
-.section{
-  margin-top:52px;
-  padding-top:28px;
-  border-top:1px solid var(--border);
-}
-.section h2{
-  font-size:1rem;
-  font-weight:500;
-  margin-bottom:24px;
-  color:var(--text);
-}
+.section{margin-top:52px;padding-top:28px;border-top:1px solid var(--border)}
+.section h2{font-size:1rem;font-weight:500;margin-bottom:24px;color:var(--text)}
 
 /* ── NEWS ── */
-.news-list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
+.news-list{display:flex;flex-direction:column;gap:0}
 .news-item{
-  display:grid;
-  grid-template-columns:68px 1fr;
-  gap:0 16px;
-  padding:7px 0;
-  border-bottom:1px solid #f2f2f2;
+  display:grid;grid-template-columns:68px 1fr;
+  gap:0 16px;padding:7px 0;border-bottom:1px solid #f2f2f2;
 }
 .news-item:first-child{border-top:1px solid #f2f2f2}
-.news-year{
-  font-size:0.76rem;
-  color:var(--light);
-  padding-top:1px;
-  font-variant-numeric:tabular-nums;
-  flex-shrink:0;
-}
-.news-content{
-  font-size:0.83rem;
-  color:var(--muted);
-  line-height:1.65;
-}
+.news-year{font-size:0.76rem;color:var(--light);padding-top:1px;font-variant-numeric:tabular-nums}
+.news-content{font-size:0.83rem;color:var(--muted);line-height:1.65}
 .news-content strong{color:var(--text);font-weight:500}
 .news-content a{color:var(--link)}
 .news-tag{
-  display:inline-block;
-  font-size:0.65rem;
-  letter-spacing:0.06em;
-  padding:1px 6px;
-  border-radius:3px;
-  margin-right:4px;
-  font-weight:500;
-  vertical-align:middle;
-  position:relative;
-  top:-1px;
+  display:inline-block;font-size:0.65rem;letter-spacing:.06em;
+  padding:1px 6px;border-radius:3px;margin-right:4px;
+  font-weight:500;vertical-align:middle;position:relative;top:-1px;
 }
 .tag-pub{background:#eef3fb;color:#1a5aa0}
 .tag-award{background:#fdf5e4;color:#8a5e00}
-.tag-media{background:#f0f8f0;color:#2d6a2d}
 .tag-talk{background:#f6f0fb;color:#6a3d9a}
-
-/* show-more */
 #news-extra{display:none}
 #news-extra.open{display:contents}
 .show-more-btn{
-  margin-top:10px;
-  font-size:0.78rem;
-  color:var(--link);
-  background:none;
-  border:none;
-  cursor:pointer;
-  padding:0;
+  margin-top:10px;font-size:0.78rem;color:var(--link);
+  background:none;border:none;cursor:pointer;padding:0;
 }
 .show-more-btn:hover{text-decoration:underline}
 
 /* ── PUBLICATIONS ── */
-.pub-filters{
-  display:flex;
-  gap:4px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
-}
+.pub-filters{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
 .pf{
-  font-size:0.72rem;
-  padding:4px 12px;
-  border:1px solid var(--border);
-  border-radius:40px;
-  cursor:pointer;
-  color:var(--muted);
-  background:var(--bg);
-  transition:all 0.15s;
+  font-size:0.72rem;padding:4px 12px;
+  border:1px solid var(--border);border-radius:40px;
+  cursor:pointer;color:var(--muted);background:var(--bg);transition:all .15s;
 }
 .pf:hover{border-color:#aaa;color:var(--text)}
 .pf.active{background:var(--text);color:#fff;border-color:var(--text)}
-
-.pub-list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
-.pub-item{
-  padding:14px 0;
-  border-bottom:1px solid #f2f2f2;
-}
+.pub-list{display:flex;flex-direction:column;gap:0}
+.pub-item{padding:14px 0;border-bottom:1px solid #f2f2f2}
 .pub-item:first-child{border-top:1px solid #f2f2f2}
-.pub-title{
-  font-size:0.87rem;
-  font-weight:500;
-  color:var(--text);
-  margin-bottom:3px;
-  line-height:1.5;
-}
+.pub-title{font-size:0.87rem;font-weight:500;color:var(--text);margin-bottom:3px;line-height:1.5}
 .pub-title a{color:var(--text)}
 .pub-title a:hover{color:var(--link);text-decoration:none}
-.pub-authors{
-  font-size:0.78rem;
-  color:var(--muted);
-  margin-bottom:3px;
-}
+.pub-authors{font-size:0.78rem;color:var(--muted);margin-bottom:3px}
 .pub-authors strong{color:var(--text);font-weight:500}
-.pub-venue{
-  font-size:0.78rem;
-  color:var(--muted);
-  margin-bottom:5px;
-}
-.pub-venue em{font-style:normal}
-.pub-award{
-  display:inline-flex;
-  align-items:center;
-  gap:3px;
-  font-size:0.72rem;
-  color:#8a5e00;
-  background:#fdf5e4;
-  padding:1px 7px;
-  border-radius:3px;
-  margin-bottom:5px;
-  font-weight:500;
-}
-.pub-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:5px;
-}
-.pub-links a{
-  font-size:0.74rem;
-  color:var(--link);
-}
+.pub-venue{font-size:0.78rem;color:var(--muted);margin-bottom:5px}
+.pub-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
+.pub-links a{font-size:0.74rem;color:var(--link)}
 .pub-status{
-  display:inline-block;
-  font-size:0.68rem;
-  padding:1px 7px;
-  border-radius:3px;
-  letter-spacing:0.04em;
-  font-weight:500;
-  vertical-align:middle;
-  margin-left:5px;
+  display:inline-block;font-size:0.68rem;padding:1px 7px;
+  border-radius:3px;letter-spacing:.04em;font-weight:500;
+  vertical-align:middle;margin-left:5px;
 }
 .st-review{background:#eef3fb;color:#1a5aa0}
 .st-prep{background:#f3f0fb;color:#5a3ea0}
-
 .pub-panel{display:none}
 .pub-panel.active{display:flex;flex-direction:column}
 
 /* ── EXPERIENCE ── */
-.exp-list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
 .exp-item{
-  display:grid;
-  grid-template-columns:110px 1fr;
-  gap:0 20px;
-  padding:12px 0;
-  border-bottom:1px solid #f2f2f2;
+  display:grid;grid-template-columns:110px 1fr;
+  gap:0 20px;padding:14px 0;border-bottom:1px solid #f2f2f2;
+  align-items:start;
 }
 .exp-item:first-child{border-top:1px solid #f2f2f2}
-.exp-period{
-  font-size:0.74rem;
-  color:var(--light);
-  padding-top:2px;
-  line-height:1.5;
+.exp-period{font-size:0.74rem;color:var(--light);padding-top:2px;line-height:1.5}
+.exp-role{font-size:0.87rem;font-weight:500;color:var(--text);margin-bottom:1px}
+.exp-org-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.exp-org{font-size:0.8rem;color:var(--muted)}
+.exp-logo{
+  height:16px;width:auto;max-width:56px;
+  object-fit:contain;flex-shrink:0;
+  filter:grayscale(100%) opacity(.45);
+  transition:filter .2s;
 }
-.exp-body{}
-.exp-role{
-  font-size:0.87rem;
-  font-weight:500;
-  color:var(--text);
-  margin-bottom:1px;
-}
-.exp-org{
-  font-size:0.8rem;
-  color:var(--muted);
-  margin-bottom:6px;
-}
-.exp-bullets{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-}
+.exp-item:hover .exp-logo{filter:grayscale(0%) opacity(.85)}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:3px}
 .exp-bullets li{
-  font-size:0.78rem;
-  color:var(--muted);
-  padding-left:12px;
-  position:relative;
-  line-height:1.6;
+  font-size:0.78rem;color:var(--muted);
+  padding-left:12px;position:relative;line-height:1.6;
 }
 .exp-bullets li::before{content:'·';position:absolute;left:0}
 
 /* ── TEACHING ── */
 .teach-item{
-  display:grid;
-  grid-template-columns:110px 1fr;
-  gap:0 20px;
-  padding:10px 0;
-  border-bottom:1px solid #f2f2f2;
+  display:grid;grid-template-columns:110px 1fr;
+  gap:0 20px;padding:10px 0;border-bottom:1px solid #f2f2f2;
 }
 .teach-item:first-child{border-top:1px solid #f2f2f2}
 .teach-period{font-size:0.74rem;color:var(--light);padding-top:2px}
-.teach-body{}
 .teach-role{font-size:0.87rem;font-weight:500;color:var(--text);margin-bottom:1px}
 .teach-org{font-size:0.78rem;color:var(--muted);margin-bottom:5px}
 .teach-course{
-  font-size:0.76rem;
-  color:var(--muted);
-  padding:4px 10px;
-  background:#f8f8f8;
-  border-left:2px solid var(--border);
-  margin-bottom:3px;
+  font-size:0.76rem;color:var(--muted);
+  padding:4px 10px;background:#f8f8f8;
+  border-left:2px solid var(--border);margin-bottom:3px;
 }
 .teach-course strong{color:var(--text);font-weight:500}
 
 /* ── AWARDS ── */
-.award-list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
 .award-item{
-  display:grid;
-  grid-template-columns:110px 1fr;
-  gap:0 20px;
-  padding:8px 0;
-  border-bottom:1px solid #f2f2f2;
-  font-size:0.83rem;
+  display:grid;grid-template-columns:110px 1fr;
+  gap:0 20px;padding:8px 0;border-bottom:1px solid #f2f2f2;font-size:0.83rem;
 }
 .award-item:first-child{border-top:1px solid #f2f2f2}
 .award-year{color:var(--light)}
@@ -438,12 +266,8 @@ nav{
 
 /* ── SERVICE ── */
 .service-item{
-  display:grid;
-  grid-template-columns:110px 1fr;
-  gap:0 20px;
-  padding:7px 0;
-  border-bottom:1px solid #f2f2f2;
-  font-size:0.82rem;
+  display:grid;grid-template-columns:110px 1fr;
+  gap:0 20px;padding:7px 0;border-bottom:1px solid #f2f2f2;font-size:0.82rem;
 }
 .service-item:first-child{border-top:1px solid #f2f2f2}
 .service-type{color:var(--light);font-size:0.74rem;padding-top:2px}
@@ -452,31 +276,36 @@ nav{
 
 /* ── FOOTER ── */
 footer{
-  max-width:860px;
-  margin:0 auto;
+  max-width:860px;margin:0 auto;
   padding:28px 40px 52px;
-  font-size:0.74rem;
-  color:var(--light);
+  font-size:0.74rem;color:var(--light);
   border-top:1px solid var(--border);
 }
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
-  nav{padding:0 20px}
+  nav{padding:0 16px}
   .wrap{padding:32px 20px 72px}
+  .affil-strip{padding:12px 20px}
   .profile{grid-template-columns:1fr;gap:20px}
-  .profile-photo{width:100px;height:100px}
+  .profile-photo,.profile-photo-placeholder{width:88px;height:88px}
   .meta-cols{grid-template-columns:1fr}
   .exp-item,.teach-item,.award-item,.service-item,.news-item{
     grid-template-columns:1fr;gap:2px
   }
+  .affil-name{display:none}
+  .affil-item{padding:4px 12px}
   footer{padding:20px 20px 40px}
+  .nav-cv{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .affil-img,.exp-logo,.traj-logo{transition:none}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav>
   <div class="nav-inner">
     <span class="nav-name">Jangjae Lee</span>
@@ -488,8 +317,34 @@ footer{
       <li><a href="#teaching">Teaching</a></li>
       <li><a href="#awards">Awards</a></li>
     </ul>
+    <a class="nav-cv" href="Jangjae_Lee_CV_0623_2026.pdf" target="_blank" rel="noreferrer">↓ Download CV</a>
   </div>
 </nav>
+
+<!-- ── AFFILIATION STRIP ── -->
+<div class="affil-strip">
+  <div class="affil-inner">
+    <span class="affil-label">Affiliated with</span>
+    <div class="affil-logos">
+      <div class="affil-item">
+        <img src="assets/UH.png" alt="University of Houston" class="affil-img"/>
+        <span class="affil-name">University of Houston</span>
+      </div>
+      <div class="affil-item">
+        <img src="assets/ONRL.png" alt="Oak Ridge National Laboratory" class="affil-img"/>
+        <span class="affil-name">Oak Ridge National Laboratory</span>
+      </div>
+      <div class="affil-item">
+        <img src="assets/TAM-MaroonBox.png" alt="Texas A&M University" class="affil-img"/>
+        <span class="affil-name">Texas A&amp;M University</span>
+      </div>
+      <div class="affil-item">
+        <img src="assets/HanyangU.jpeg" alt="Hanyang University" class="affil-img"/>
+        <span class="affil-name">Hanyang University</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="wrap">
 
@@ -509,22 +364,26 @@ footer{
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         jlee277@central.uh.edu
       </a>
-      <a href="https://scholar.google.com" target="_blank">
+      <a href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Google Scholar
       </a>
-      <a href="https://www.linkedin.com/in/jangjlee10/" target="_blank">
+      <a href="https://www.linkedin.com/in/jangjlee10/" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
       </a>
-      <a href="https://github.com/Jerry03120/" target="_blank">
+      <a href="https://github.com/Jerry03120/" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="var(--link)" stroke="none"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
+      </a>
+      <a href="Jangjae_Lee_CV_0623_2026.pdf" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Curriculum Vitae
       </a>
     </div>
 
     <p class="bio">
-      I am a Postdoctoral Research Fellow in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>, working with Dr. Abigail L. Beck. My research focuses on applying machine learning to improve the resilience of critical infrastructure — particularly power grids — against extreme weather events. I completed my Ph.D. in Civil Engineering at <strong>Texas A&amp;M University</strong> under Dr. Stephanie G. Paal, and interned at <strong>Oak Ridge National Laboratory</strong> as part of the Grid Resilience Research Group.
+      I am a Postdoctoral Research Fellow in the Department of Civil and Environmental Engineering at the <strong>University of Houston</strong>, working with Dr. Abigail L. Beck. My research focuses on applying machine learning and computer vision to improve the resilience of critical infrastructure — particularly power grids and coastal utility systems — against extreme weather events. I completed my Ph.D. in Civil Engineering at <strong>Texas A&amp;M University</strong> under Dr. Stephanie G. Paal, and interned at <strong>Oak Ridge National Laboratory</strong> as part of the Grid Resilience Research Group.
     </p>
 
     <div class="meta-cols">
@@ -543,64 +402,52 @@ footer{
         <h4>Trajectory</h4>
         <div class="traj-item">
           <span class="traj-year">2025–present</span>
-          <span class="traj-desc"><strong>University of Houston</strong> Postdoctoral Fellow</span>
+          <span class="traj-desc">
+            <img src="assets/UH.png" alt="" class="traj-logo"/>
+            <strong>University of Houston</strong> Postdoctoral Fellow
+          </span>
         </div>
         <div class="traj-item">
           <span class="traj-year">2024</span>
-          <span class="traj-desc"><strong>Oak Ridge National Laboratory</strong> Research Intern</span>
+          <span class="traj-desc">
+            <img src="assets/ONRL.png" alt="" class="traj-logo"/>
+            <strong>Oak Ridge National Lab</strong> Research Intern
+          </span>
         </div>
         <div class="traj-item">
           <span class="traj-year">2020–2025</span>
-          <span class="traj-desc"><strong>Texas A&amp;M University</strong> Ph.D., Civil Engineering</span>
+          <span class="traj-desc">
+            <img src="assets/TAM-MaroonBox.png" alt="" class="traj-logo"/>
+            <strong>Texas A&amp;M University</strong> Ph.D., Civil Eng.
+          </span>
         </div>
         <div class="traj-item">
           <span class="traj-year">2016–2018</span>
-          <span class="traj-desc"><strong>Hanyang University</strong> M.S., Architectural Eng.</span>
+          <span class="traj-desc">
+            <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
+            <strong>Hanyang University</strong> M.S., Arch. Eng.
+          </span>
         </div>
         <div class="traj-item">
           <span class="traj-year">2010–2016</span>
-          <span class="traj-desc"><strong>Hanyang University (ERICA)</strong> B.S.</span>
+          <span class="traj-desc">
+            <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
+            <strong>Hanyang University (ERICA)</strong> B.S.
+          </span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="profile-photo" style="background:none;padding:0">
-    <svg width="148" height="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:4px;display:block">
-      <rect width="148" height="148" fill="#dce4f0"/>
-      <!-- background gradient -->
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="148" y2="148" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#d0daea"/>
-          <stop offset="100%" stop-color="#b8c8e0"/>
-        </linearGradient>
-        <clipPath id="circle-clip">
-          <circle cx="74" cy="58" r="30"/>
-        </clipPath>
-      </defs>
-      <rect width="148" height="148" fill="url(#bg)"/>
-      <!-- head -->
-      <circle cx="74" cy="58" r="30" fill="#a8b8cc"/>
-      <!-- face highlight -->
-      <circle cx="74" cy="54" r="22" fill="#bccadc"/>
-      <!-- eyes -->
-      <ellipse cx="64" cy="54" rx="3.5" ry="3" fill="#6a7a8a"/>
-      <ellipse cx="84" cy="54" rx="3.5" ry="3" fill="#6a7a8a"/>
-      <!-- nose -->
-      <path d="M74 58 Q71 63 74 65 Q77 63 74 58" fill="#8a9aaa" opacity="0.5"/>
-      <!-- mouth -->
-      <path d="M67 69 Q74 74 81 69" stroke="#7a8a9a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <!-- body / suit -->
-      <path d="M20 148 C20 118 40 108 74 108 C108 108 128 118 128 148Z" fill="#2c3e5a"/>
-      <!-- shirt -->
-      <path d="M60 108 L74 122 L88 108" fill="#e8edf5"/>
-      <!-- tie -->
-      <path d="M74 112 L70 124 L74 128 L78 124Z" fill="#c0392b"/>
-      <!-- collar -->
-      <path d="M60 108 L74 118 M88 108 L74 118" stroke="#d0d8e8" stroke-width="1.5"/>
-      <!-- subtle label -->
-      <text x="74" y="142" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="7" fill="#8899aa" letter-spacing="0.5">Add your photo</text>
-    </svg>
+  <!-- Profile photo: replace assets/profile.jpg with your photo -->
+  <img
+    src="assets/profile.jpg"
+    alt="Portrait of Jangjae Lee"
+    class="profile-photo"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+  />
+  <div class="profile-photo-placeholder" style="display:none">
+    <span style="padding:8px;line-height:1.5">Place your photo at<br>assets/profile.jpg</span>
   </div>
 </div>
 
@@ -610,53 +457,52 @@ footer{
   <div class="news-list">
     <div class="news-item">
       <div class="news-year">2026</div>
-      <div class="news-content"><span class="news-tag tag-talk">Talk</span> Presenting at <strong>ASCE EMI Conference</strong>, Boulder, CO — automated structural assessment of coastal utility poles using Grounded SAM and LiDAR. [Accepted]</div>
+      <div class="news-content"><span class="news-tag tag-talk">Talk</span>Presenting at <strong>ASCE EMI Conference</strong>, Boulder, CO — automated structural assessment of coastal utility poles using Grounded SAM and LiDAR. [Accepted]</div>
     </div>
     <div class="news-item">
       <div class="news-year">2026</div>
-      <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="#">An integrated model for predicting power outages from various extreme weather events</a> — under review (R2 revision).</div>
+      <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="#">An integrated model for predicting power outages from various extreme weather events</a> — under review (R2 revision).</div>
     </div>
     <div class="news-item">
       <div class="news-year">2026</div>
-      <div class="news-content"><span class="news-tag tag-talk">Poster</span> <a href="#">Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability in Houston</a> accepted at <strong>NHERI Computational Symposium</strong>, Berkeley, CA.</div>
+      <div class="news-content"><span class="news-tag tag-talk">Poster</span><a href="#">Integrated spatiotemporal assessment of infrastructure resilience and community vulnerability in Houston</a> accepted at <strong>NHERI Computational Symposium</strong>, Berkeley, CA.</div>
     </div>
     <div class="news-item">
       <div class="news-year">2025</div>
-      <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank">A near-real-time model for predicting electricity disruptions in Texas during winter storms</a> published in <strong>IEEE Access</strong>.</div>
+      <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank">A near-real-time model for predicting electricity disruptions in Texas during winter storms</a> published in <strong>IEEE Access</strong>.</div>
     </div>
     <div class="news-item">
       <div class="news-year">2025</div>
-      <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank">A data-driven approach to predicting power outages during winter storms</a> published in <strong>Computational Urban Science</strong> (Springer).</div>
+      <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank">A data-driven approach to predicting power outages during winter storms</a> published in <strong>Computational Urban Science</strong> (Springer).</div>
     </div>
     <div class="news-item">
       <div class="news-year">2025</div>
-      <div class="news-content"><span class="news-tag tag-talk">Talk</span> Presented at <strong>ASCE EMI Conference</strong>, Anaheim, CA — transfer learning for power outage prediction across diverse climate hazards.</div>
+      <div class="news-content"><span class="news-tag tag-talk">Talk</span>Presented at <strong>ASCE EMI Conference</strong>, Anaheim, CA — transfer learning for power outage prediction across diverse climate hazards.</div>
     </div>
-
     <div id="news-extra">
       <div class="news-item">
         <div class="news-year">2024</div>
-        <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank">A generalized outage prediction model for various types of extreme climate events in Texas</a> at <strong>IEEE Big Data 2024</strong>.</div>
+        <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank">A generalized outage prediction model for various types of extreme climate events in Texas</a> at <strong>IEEE Big Data 2024</strong>.</div>
       </div>
       <div class="news-item">
         <div class="news-year">2024</div>
-        <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.1109/BigData62323.2024.10825465" target="_blank">Knowledge transfer predictive models for power outage</a> at <strong>IEEE Big Data 2024</strong>.</div>
+        <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.1109/BigData62323.2024.10825465" target="_blank">Knowledge transfer predictive models for power outage</a> at <strong>IEEE Big Data 2024</strong>.</div>
       </div>
       <div class="news-item">
         <div class="news-year">2024</div>
-        <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank">Shear strength of SFRC exterior beam-column joints</a> published in <strong>Structures</strong> (Elsevier).</div>
+        <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank">Shear strength of SFRC exterior beam-column joints</a> published in <strong>Structures</strong> (Elsevier).</div>
       </div>
       <div class="news-item">
         <div class="news-year">2024</div>
-        <div class="news-content"><span class="news-tag tag-talk">Talk</span> Two oral presentations at <strong>ASCE EMI / PMC Conference</strong>, Chicago, IL — generalized power outage prediction models.</div>
+        <div class="news-content"><span class="news-tag tag-talk">Talk</span>Two oral presentations at <strong>ASCE EMI / PMC Conference</strong>, Chicago, IL — generalized power outage prediction models.</div>
       </div>
       <div class="news-item">
         <div class="news-year">2023</div>
-        <div class="news-content"><span class="news-tag tag-talk">Talk</span> Presented at <strong>EMI Conference</strong>, Atlanta, GA — ensemble-based time series analysis for winter storm outage prediction.</div>
+        <div class="news-content"><span class="news-tag tag-talk">Talk</span>Presented at <strong>EMI Conference</strong>, Atlanta, GA — ensemble-based time series analysis for winter storm outage prediction.</div>
       </div>
       <div class="news-item">
         <div class="news-year">2018</div>
-        <div class="news-content"><span class="news-tag tag-pub">Paper</span> <a href="https://doi.org/10.5659/JAIK_SC.2018.34.4.15" target="_blank">Seismic performance of RC exterior beam-column joints with steel fiber volume fractions</a> in <strong>Journal of the Architectural Institute of Korea</strong>.</div>
+        <div class="news-content"><span class="news-tag tag-pub">Paper</span><a href="https://doi.org/10.5659/JAIK_SC.2018.34.4.15" target="_blank">Seismic performance of RC exterior beam-column joints with steel fiber volume fractions</a> in <strong>Journal of the Architectural Institute of Korea</strong>.</div>
       </div>
     </div>
     <button class="show-more-btn" id="news-toggle" onclick="toggleNews()">Show more ↓</button>
@@ -673,57 +519,50 @@ footer{
     <button class="pf" onclick="filterPub('inprog',this)">In Progress</button>
   </div>
 
+  <!-- ALL -->
   <div id="pub-all" class="pub-panel active">
-    <!-- J1 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank">A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models</a></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Zhe Zhang, Stephanie G. Paal</div>
       <div class="pub-venue">Computational Urban Science, Springer · 2025</div>
       <div class="pub-links"><a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank">DOI</a></div>
     </div>
-    <!-- J2 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank">A near-real-time model for predicting electricity disruptions in Texas during winter storms</a></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Sangkeun M. Lee, Supriya Chinthavali, Stephanie G. Paal</div>
       <div class="pub-venue">IEEE Access, 13, 139583–139603 · 2025</div>
       <div class="pub-links"><a href="https://doi.org/10.1109/ACCESS.2025.3596531" target="_blank">DOI</a></div>
     </div>
-    <!-- CP1 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.5194/ica-proc-7-6-2025" target="_blank">A Wide-and-Deep-Based Time Sequence Model for Predicting Power Outages Caused by Extreme Winter Storms</a></div>
       <div class="pub-authors">Jiawei Liu, Zhe Zhang, Yuhao Cheng, <strong>Jangjae Lee</strong>, Stephanie Paal, Daoqin Li</div>
       <div class="pub-venue">ICA Proceedings, 7, 6 · 2025</div>
       <div class="pub-links"><a href="https://doi.org/10.5194/ica-proc-7-6-2025" target="_blank">DOI</a></div>
     </div>
-    <!-- CP2 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank">A generalized outage prediction model for various types of extreme climate events in Texas</a></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Sangkeun M. Lee, Stephanie G. Paal, Supriya Chinthavali</div>
       <div class="pub-venue">IEEE International Conference on Big Data · 2024</div>
       <div class="pub-links"><a href="https://doi.org/10.1109/BigData62323.2024.10825479" target="_blank">DOI</a></div>
     </div>
-    <!-- CP3 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1109/BigData62323.2024.10825465" target="_blank">Knowledge transfer predictive models for power outage caused by various types of extreme weather events</a></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Stephanie G. Paal</div>
       <div class="pub-venue">IEEE International Conference on Big Data · 2024</div>
       <div class="pub-links"><a href="https://doi.org/10.1109/BigData62323.2024.10825465" target="_blank">DOI</a></div>
     </div>
-    <!-- J3 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank">Shear strength of steel fiber-reinforced concrete (SFRC) exterior beam-column joints with various anchorage details under cyclic loading</a></div>
       <div class="pub-authors">Dong Hyeon Son, Byung-Il Bae, <strong>Jangjae Lee</strong>, Chang-Sik Choi</div>
       <div class="pub-venue">Structures, 61, 105940 · 2024</div>
       <div class="pub-links"><a href="https://doi.org/10.1016/j.istruc.2024.105940" target="_blank">DOI</a></div>
     </div>
-    <!-- J4 -->
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.5659/JAIK_SC.2018.34.4.15" target="_blank">An experimental study on the seismic performance of RC exterior beam-column joints with steel fiber volume fractions</a></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Byung-Il Bae, Chang-Sik Choi</div>
       <div class="pub-venue">Journal of the Architectural Institute of Korea, 34(4) · 2018</div>
       <div class="pub-links"><a href="https://doi.org/10.5659/JAIK_SC.2018.34.4.15" target="_blank">DOI</a></div>
     </div>
-    <!-- In progress -->
     <div class="pub-item">
       <div class="pub-title">An integrated model for predicting power outages caused by various types of extreme weather events <span class="pub-status st-review">Under Review · R2</span></div>
       <div class="pub-authors"><strong>Jangjae Lee</strong>, Sangkeun M. Lee, Supriya Chinthavali, Stephanie G. Paal</div>
@@ -751,6 +590,7 @@ footer{
     </div>
   </div>
 
+  <!-- JOURNAL -->
   <div id="pub-journal" class="pub-panel">
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.1007/s43762-025-00222-9" target="_blank">A data-driven approach to predicting power outages during winter storms in the southern U.S. leveraging nonparametric machine learning models</a></div>
@@ -778,6 +618,7 @@ footer{
     </div>
   </div>
 
+  <!-- CONF -->
   <div id="pub-conf" class="pub-panel">
     <div class="pub-item">
       <div class="pub-title"><a href="https://doi.org/10.5194/ica-proc-7-6-2025" target="_blank">A Wide-and-Deep-Based Time Sequence Model for Predicting Power Outages Caused by Extreme Winter Storms</a></div>
@@ -799,6 +640,7 @@ footer{
     </div>
   </div>
 
+  <!-- IN PROGRESS -->
   <div id="pub-inprog" class="pub-panel">
     <div class="pub-item">
       <div class="pub-title">An integrated model for predicting power outages caused by various types of extreme weather events <span class="pub-status st-review">Under Review · R2</span></div>
@@ -826,52 +668,62 @@ footer{
 <!-- ── RESEARCH ── -->
 <div class="section" id="research">
   <h2>Research Experience</h2>
-  <div class="exp-list">
-    <div class="exp-item">
-      <div class="exp-period">2025–present</div>
-      <div class="exp-body">
-        <div class="exp-role">Postdoctoral Research Fellow</div>
-        <div class="exp-org">University of Houston · PI: Dr. Abigail L. Beck</div>
-        <ul class="exp-bullets">
-          <li>Building data-driven frameworks integrating 311 service requests and socio-demographic data to quantify urban resilience across Houston neighborhoods.</li>
-          <li>Implementing Grounded SAM for automated utility pole deterioration assessment via LiDAR point cloud integration.</li>
-          <li>Investigating U.S. coastal infrastructure quality through statistical modeling and fieldwork.</li>
-        </ul>
+  <div class="exp-item">
+    <div class="exp-period">2025–present</div>
+    <div>
+      <div class="exp-role">Postdoctoral Research Fellow</div>
+      <div class="exp-org-row">
+        <img src="assets/UH.png" alt="UH" class="exp-logo"/>
+        <span class="exp-org">University of Houston · PI: Dr. Abigail L. Beck</span>
       </div>
+      <ul class="exp-bullets">
+        <li>Building data-driven frameworks integrating 311 service requests and socio-demographic data to quantify urban resilience across Houston neighborhoods.</li>
+        <li>Implementing Grounded SAM for automated utility pole deterioration assessment via LiDAR point cloud integration.</li>
+        <li>Investigating U.S. coastal infrastructure quality through statistical modeling and fieldwork validation.</li>
+      </ul>
     </div>
-    <div class="exp-item">
-      <div class="exp-period">2022–2025</div>
-      <div class="exp-body">
-        <div class="exp-role">Doctoral Researcher</div>
-        <div class="exp-org">Texas A&amp;M University · Advisor: Dr. Stephanie G. Paal</div>
-        <ul class="exp-bullets">
-          <li>Developed ML frameworks for large-scale power outage prediction across nine U.S. states.</li>
-          <li>Optimized ensemble models (XGBoost, LightGBM, CatBoost) with Bayesian tuning and SHAP-based explainability.</li>
-          <li>Deployed near-real-time prediction systems; applied transfer learning for data-sparse hazard scenarios.</li>
-        </ul>
+  </div>
+  <div class="exp-item">
+    <div class="exp-period">2022–2025</div>
+    <div>
+      <div class="exp-role">Doctoral Researcher</div>
+      <div class="exp-org-row">
+        <img src="assets/TAM-MaroonBox.png" alt="TAMU" class="exp-logo"/>
+        <span class="exp-org">Texas A&amp;M University · Advisor: Dr. Stephanie G. Paal</span>
       </div>
+      <ul class="exp-bullets">
+        <li>Developed ML frameworks for large-scale power outage prediction across nine U.S. states using multi-source meteorological and socio-demographic datasets.</li>
+        <li>Optimized ensemble models (XGBoost, LightGBM, CatBoost) with Bayesian hyperparameter tuning and SHAP-based explainability.</li>
+        <li>Deployed near-real-time prediction systems; applied transfer learning for data-sparse climate hazard scenarios.</li>
+      </ul>
     </div>
-    <div class="exp-item">
-      <div class="exp-period">May–Aug 2024</div>
-      <div class="exp-body">
-        <div class="exp-role">Research Intern</div>
-        <div class="exp-org">Oak Ridge National Laboratory · Mentor: Dr. Sangkeun M. Lee</div>
-        <ul class="exp-bullets">
-          <li>National-scale power grid resilience analysis; developed interpretable ML for critical energy infrastructure.</li>
-          <li>Contributed to one journal article (IEEE Access) and one conference paper.</li>
-        </ul>
+  </div>
+  <div class="exp-item">
+    <div class="exp-period">May–Aug 2024</div>
+    <div>
+      <div class="exp-role">Research Intern</div>
+      <div class="exp-org-row">
+        <img src="assets/ONRL.png" alt="ORNL" class="exp-logo"/>
+        <span class="exp-org">Oak Ridge National Laboratory · Mentor: Dr. Sangkeun M. Lee</span>
       </div>
+      <ul class="exp-bullets">
+        <li>National-scale power grid resilience analysis; developed interpretable ML models for critical energy infrastructure.</li>
+        <li>Contributed to one journal article (IEEE Access) and one conference paper (IEEE BigData 2024).</li>
+      </ul>
     </div>
-    <div class="exp-item">
-      <div class="exp-period">2016–2021</div>
-      <div class="exp-body">
-        <div class="exp-role">Graduate Research Assistant</div>
-        <div class="exp-org">Hanyang University · Advisor: Dr. Chang-Sik Choi · NRF-funded</div>
-        <ul class="exp-bullets">
-          <li>Experimental research on seismic performance of SFRC structures; cyclic loading tests.</li>
-          <li>Grand Prize, 10th KIBC Construction Technology Design Contest (2015).</li>
-        </ul>
+  </div>
+  <div class="exp-item">
+    <div class="exp-period">2016–2021</div>
+    <div>
+      <div class="exp-role">Graduate Research Assistant</div>
+      <div class="exp-org-row">
+        <img src="assets/HanyangU.jpeg" alt="Hanyang" class="exp-logo"/>
+        <span class="exp-org">Hanyang University · Advisor: Dr. Chang-Sik Choi · NRF-funded ($250,000)</span>
       </div>
+      <ul class="exp-bullets">
+        <li>Experimental research on seismic performance of SFRC structures; designed specimens and performed cyclic loading tests.</li>
+        <li>Grand Prize, 10th KIBC Construction Technology Design Contest (2015).</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -879,32 +731,30 @@ footer{
 <!-- ── TEACHING ── -->
 <div class="section" id="teaching">
   <h2>Teaching</h2>
-  <div class="exp-list">
-    <div class="teach-item">
-      <div class="teach-period">Spring 2026</div>
-      <div class="teach-body">
-        <div class="teach-role">Guest Lecturer</div>
-        <div class="teach-org">University of Houston · Instructor of Record: Dr. Vedhus Hoskere / Dr. Abigail L. Beck</div>
-        <div class="teach-course"><strong>ENGR 2301</strong> Engineering Mechanics I (Statics) — 3D Rigid Body Equilibrium, Truss Analysis</div>
-        <div class="teach-course"><strong>CIVE 3337</strong> Structural Analysis — Structural Classification and Stability</div>
-      </div>
+  <div class="teach-item">
+    <div class="teach-period">Spring 2026</div>
+    <div>
+      <div class="teach-role">Guest Lecturer</div>
+      <div class="teach-org">University of Houston · Dr. Vedhus Hoskere / Dr. Abigail L. Beck</div>
+      <div class="teach-course"><strong>ENGR 2301</strong> Engineering Mechanics I (Statics) — 3D Rigid Body Equilibrium, Truss Analysis</div>
+      <div class="teach-course"><strong>CIVE 3337</strong> Structural Analysis — Structural Classification and Stability</div>
     </div>
-    <div class="teach-item">
-      <div class="teach-period">Fall 2025</div>
-      <div class="teach-body">
-        <div class="teach-role">Guest Lecturer</div>
-        <div class="teach-org">University of Houston · 40+ undergraduate students</div>
-        <div class="teach-course"><strong>ENGR 2301</strong> Engineering Mechanics I — Centroids and Moment of Inertia</div>
-      </div>
+  </div>
+  <div class="teach-item">
+    <div class="teach-period">Fall 2025</div>
+    <div>
+      <div class="teach-role">Guest Lecturer</div>
+      <div class="teach-org">University of Houston · 40+ undergraduate students</div>
+      <div class="teach-course"><strong>ENGR 2301</strong> Engineering Mechanics I — Centroids and Moment of Inertia</div>
     </div>
-    <div class="teach-item">
-      <div class="teach-period">2023–2024</div>
-      <div class="teach-body">
-        <div class="teach-role">Teaching Assistant</div>
-        <div class="teach-org">Texas A&amp;M University</div>
-        <div class="teach-course"><strong>CVEN 363</strong> Engineering Mechanics – Dynamics (60+ students, 2 sections)</div>
-        <div class="teach-course"><strong>CVEN 345</strong> Theory of Structures (150+ students)</div>
-      </div>
+  </div>
+  <div class="teach-item">
+    <div class="teach-period">2023–2024</div>
+    <div>
+      <div class="teach-role">Teaching Assistant</div>
+      <div class="teach-org">Texas A&amp;M University</div>
+      <div class="teach-course"><strong>CVEN 363</strong> Engineering Mechanics – Dynamics (60+ students, 2 sections)</div>
+      <div class="teach-course"><strong>CVEN 345</strong> Theory of Structures (150+ students)</div>
     </div>
   </div>
 </div>
@@ -912,31 +762,29 @@ footer{
 <!-- ── AWARDS ── -->
 <div class="section" id="awards">
   <h2>Honors &amp; Awards</h2>
-  <div class="award-list">
-    <div class="award-item">
-      <div class="award-year">2024–2025</div>
-      <div><div class="award-name">Dissertation Fellowship</div><div class="award-org">Texas A&amp;M University</div></div>
-    </div>
-    <div class="award-item">
-      <div class="award-year">2020–2024</div>
-      <div><div class="award-name">Excellence Fellowship</div><div class="award-org">Texas A&amp;M University</div></div>
-    </div>
-    <div class="award-item">
-      <div class="award-year">2016–2018</div>
-      <div><div class="award-name">HY-in Scholarship</div><div class="award-org">Hanyang University (Seoul)</div></div>
-    </div>
-    <div class="award-item">
-      <div class="award-year">2015</div>
-      <div><div class="award-name">Grand Prize — 10th Construction Technology Competition</div><div class="award-org">Korea Institute of Building Construction (KIBC)</div></div>
-    </div>
-    <div class="award-item">
-      <div class="award-year">2015–2016</div>
-      <div><div class="award-name">Honor Scholarship</div><div class="award-org">Hanyang University (ERICA)</div></div>
-    </div>
-    <div class="award-item">
-      <div class="award-year">2015</div>
-      <div><div class="award-name">Bronze Prize — Capstone Design Competition</div><div class="award-org">Hanyang University (ERICA)</div></div>
-    </div>
+  <div class="award-item">
+    <div class="award-year">2024–2025</div>
+    <div><div class="award-name">Dissertation Fellowship</div><div class="award-org">Texas A&amp;M University</div></div>
+  </div>
+  <div class="award-item">
+    <div class="award-year">2020–2024</div>
+    <div><div class="award-name">Excellence Fellowship</div><div class="award-org">Texas A&amp;M University</div></div>
+  </div>
+  <div class="award-item">
+    <div class="award-year">2016–2018</div>
+    <div><div class="award-name">HY-in Scholarship</div><div class="award-org">Hanyang University (Seoul)</div></div>
+  </div>
+  <div class="award-item">
+    <div class="award-year">2015</div>
+    <div><div class="award-name">Grand Prize — 10th Construction Technology Competition</div><div class="award-org">Korea Institute of Building Construction (KIBC)</div></div>
+  </div>
+  <div class="award-item">
+    <div class="award-year">2015–2016</div>
+    <div><div class="award-name">Honor Scholarship</div><div class="award-org">Hanyang University (ERICA)</div></div>
+  </div>
+  <div class="award-item">
+    <div class="award-year">2015</div>
+    <div><div class="award-name">Bronze Prize — Capstone Design Competition</div><div class="award-org">Hanyang University (ERICA)</div></div>
   </div>
 </div>
 
@@ -967,13 +815,27 @@ footer{
     <div class="service-type">Member</div>
     <div class="service-desc">American Concrete Institute (ACI, 2016–present)</div>
   </div>
+  <div class="service-item">
+    <div class="service-type">Member</div>
+    <div class="service-desc">Architectural Institute of Korea (AIK, 2016–present)</div>
+  </div>
+  <div class="service-item">
+    <div class="service-type">Member</div>
+    <div class="service-desc">Korea Concrete Institute (KCI, 2016–present)</div>
+  </div>
 </div>
 
 </div><!-- /wrap -->
 
 <footer>
-  <div style="max-width:860px;margin:0 auto;padding:0 40px">
-    Jangjae Lee · University of Houston · © 2026
+  <div style="max-width:860px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center">
+    <span>Jangjae Lee · University of Houston · © 2026</span>
+    <span style="display:flex;gap:16px">
+      <a href="mailto:jlee277@central.uh.edu" style="color:var(--light)">Email</a>
+      <a href="https://scholar.google.com/citations?user=cNvgzJ0AAAAJ&hl=en" target="_blank" style="color:var(--light)">Scholar</a>
+      <a href="https://github.com/Jerry03120/" target="_blank" style="color:var(--light)">GitHub</a>
+      <a href="https://www.linkedin.com/in/jangjlee10/" target="_blank" style="color:var(--light)">LinkedIn</a>
+    </span>
   </div>
 </footer>
 
@@ -990,15 +852,14 @@ function filterPub(type,btn){
   document.getElementById('pub-'+type).classList.add('active');
   btn.classList.add('active');
 }
-// nav active state
+// nav active highlight on scroll
 const navAs=document.querySelectorAll('.nav-links a');
-const secs=document.querySelectorAll('[id]');
+const secs=[...document.querySelectorAll('[id]')].filter(s=>s.id);
 window.addEventListener('scroll',()=>{
   let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id});
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-70)cur=s.id});
   navAs.forEach(a=>{
-    const active=a.getAttribute('href')==='#'+cur;
-    a.style.color=active?'var(--link)':'';
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
   });
 },{passive:true});
 </script>
