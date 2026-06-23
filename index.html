@@ -87,12 +87,8 @@ nav{
 .affil-img{
   height:26px;width:auto;max-width:72px;
   object-fit:contain;
-  filter:grayscale(100%) opacity(.45);
-  transition:filter .25s;
 }
-.affil-item:hover .affil-img{filter:grayscale(0%) opacity(1)}
-.affil-name{font-size:0.72rem;color:var(--light);white-space:nowrap}
-.affil-item:hover .affil-name{color:var(--muted)}
+.affil-name{font-size:0.72rem;color:var(--muted);white-space:nowrap}
 
 /* ── PROFILE ── */
 .profile{
@@ -137,20 +133,31 @@ nav{
 .meta-group ul{list-style:none;display:flex;flex-direction:column;gap:4px}
 .meta-group ul li{font-size:0.82rem;color:var(--muted)}
 .meta-group ul li::before{content:'— ';color:var(--border)}
-.traj-item{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+/* traj-item moved below */
 .traj-year{
   font-size:0.72rem;color:var(--light);
   font-variant-numeric:tabular-nums;min-width:68px;flex-shrink:0;
 }
 .traj-desc{font-size:0.82rem;color:var(--muted)}
 .traj-desc strong{color:var(--text);font-weight:500}
-.traj-logo{
-  height:14px;width:auto;max-width:48px;
-  object-fit:contain;vertical-align:middle;
-  filter:grayscale(100%) opacity(.5);
-  margin-right:4px;transition:filter .2s;
+.traj-item{
+  display:grid;grid-template-columns:90px 1fr;
+  gap:0 14px;padding:10px 0;
+  border-bottom:1px solid #f5f5f5;align-items:start;
 }
-.traj-item:hover .traj-logo{filter:grayscale(0%) opacity(.9)}
+.traj-item:last-child{border-bottom:none}
+.traj-year{
+  font-size:0.72rem;color:var(--light);
+  font-variant-numeric:tabular-nums;
+  padding-top:4px;line-height:1.4;
+}
+.traj-name-row{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.traj-logo{
+  height:18px;width:auto;max-width:56px;
+  object-fit:contain;flex-shrink:0;
+}
+.traj-org{font-size:0.9rem;font-weight:500;color:var(--text);line-height:1.3}
+.traj-role{font-size:0.78rem;color:var(--muted);line-height:1.4}
 
 /* ── SECTION ── */
 .section{margin-top:52px;padding-top:28px;border-top:1px solid var(--border)}
@@ -225,12 +232,9 @@ nav{
 .exp-org-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .exp-org{font-size:0.8rem;color:var(--muted)}
 .exp-logo{
-  height:16px;width:auto;max-width:56px;
+  height:18px;width:auto;max-width:60px;
   object-fit:contain;flex-shrink:0;
-  filter:grayscale(100%) opacity(.45);
-  transition:filter .2s;
 }
-.exp-item:hover .exp-logo{filter:grayscale(0%) opacity(.85)}
 .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:3px}
 .exp-bullets li{
   font-size:0.78rem;color:var(--muted);
@@ -401,39 +405,54 @@ footer{
       <div class="meta-group">
         <h4>Trajectory</h4>
         <div class="traj-item">
-          <span class="traj-year">2025–present</span>
-          <span class="traj-desc">
-            <img src="assets/UH.png" alt="" class="traj-logo"/>
-            <strong>University of Houston</strong> Postdoctoral Fellow
-          </span>
+          <div class="traj-year">2025–present</div>
+          <div>
+            <div class="traj-name-row">
+              <img src="assets/UH.png" alt="" class="traj-logo"/>
+              <span class="traj-org">University of Houston</span>
+            </div>
+            <div class="traj-role">Postdoctoral Fellow</div>
+          </div>
         </div>
         <div class="traj-item">
-          <span class="traj-year">2024</span>
-          <span class="traj-desc">
-            <img src="assets/ONRL.png" alt="" class="traj-logo"/>
-            <strong>Oak Ridge National Lab</strong> Research Intern
-          </span>
+          <div class="traj-year">2024</div>
+          <div>
+            <div class="traj-name-row">
+              <img src="assets/ONRL.png" alt="" class="traj-logo"/>
+              <span class="traj-org">Oak Ridge National Lab</span>
+            </div>
+            <div class="traj-role">Research Intern</div>
+          </div>
         </div>
         <div class="traj-item">
-          <span class="traj-year">2020–2025</span>
-          <span class="traj-desc">
-            <img src="assets/TAM-MaroonBox.png" alt="" class="traj-logo"/>
-            <strong>Texas A&amp;M University</strong> Ph.D., Civil Eng.
-          </span>
+          <div class="traj-year">2020–2025</div>
+          <div>
+            <div class="traj-name-row">
+              <img src="assets/TAM-MaroonBox.png" alt="" class="traj-logo"/>
+              <span class="traj-org">Texas A&amp;M University</span>
+            </div>
+            <div class="traj-role">Ph.D., Civil Engineering</div>
+          </div>
         </div>
         <div class="traj-item">
-          <span class="traj-year">2016–2018</span>
-          <span class="traj-desc">
-            <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
-            <strong>Hanyang University</strong> M.S., Arch. Eng.
-          </span>
+          <div class="traj-year">2016–2018</div>
+          <div>
+            <div class="traj-name-row">
+              <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
+              <span class="traj-org">Hanyang University</span>
+            </div>
+            <div class="traj-role">M.S., Architectural Engineering</div>
+          </div>
         </div>
         <div class="traj-item">
-          <span class="traj-year">2010–2016</span>
-          <span class="traj-desc">
-            <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
-            <strong>Hanyang University (ERICA)</strong> B.S.
-          </span>
+          <div class="traj-year">2010–2016</div>
+          <div>
+            <div class="traj-name-row">
+              <img src="assets/HanyangU.jpeg" alt="" class="traj-logo"/>
+              <span class="traj-org">Hanyang University (ERICA)</span>
+            </div>
+            <div class="traj-role">B.S., Architectural Engineering</div>
+          </div>
         </div>
       </div>
     </div>
