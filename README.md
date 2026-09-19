@@ -61,7 +61,7 @@ This portfolio is built as a **single-page responsive website** using HTML5 and 
 ## 📬 Contact
 
 **Jangjae Lee**  
-Postdoctoral Research Fellow  
+Post Doctoral Fellow  
 Department of Civil and Environmental Engineering  
 University of Houston, Houston, TX 77204
 
